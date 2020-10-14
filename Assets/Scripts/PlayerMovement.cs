@@ -4,49 +4,35 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
-    private Vector2 direction;
-    private Animator animator;
+    public float speed = 1f;
+    private Vector2 movement;
+    public  Rigidbody2D rb;
+    public Animator animator;
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();    
-    }
-    private void Update()
+
+    void Update()
     {
         GetInput();
+    }
+
+    private void FixedUpdate()
+    {
         Move();
     }
 
     private void GetInput()
     {
-        direction = Vector2.zero;
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(KeyCode.W)){
-            direction += Vector2.up;
-        }
-        if (Input.GetKey(KeyCode.A)){
-            direction += Vector2.left;
-        }
-        if (Input.GetKey(KeyCode.S)){
-            direction += Vector2.down;
-        }
-        if (Input.GetKey(KeyCode.D)){
-            direction += Vector2.right;
-        }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
     }
 
     private void Move()
     {
-        transform.Translate(speed * direction * Time.deltaTime);
-        SetAnimatorMovement(direction);
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
-    private void SetAnimatorMovement(Vector2 direction)
-    {
-        animator.SetFloat("xDirection", direction.x);
-        animator.SetFloat("yDirection", direction.y);
-        print(animator.GetFloat("xDirection"));
-        print(animator.GetFloat("yDirection"));
-    }
 }
