@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
 public class JoinLobbyMenu : MonoBehaviour
 {
-    [SerializeField] private LobbyNetworkManager networkManager = null;
+    [SerializeField] private NetworkManager networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
@@ -17,14 +18,14 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        LobbyNetworkManager.OnClientConnected += HandleClientConnected;
-        LobbyNetworkManager.OnClientDisconnected += HandleClientDisconnected;
+        //LobbyNetworkManager.OnClientConnected += HandleClientConnected;
+        //LobbyNetworkManager.OnClientDisconnected += HandleClientDisconnected;
     }
 
     private void OnDisable()
     {
-        LobbyNetworkManager.OnClientConnected -= HandleClientConnected;
-        LobbyNetworkManager.OnClientDisconnected -= HandleClientDisconnected;
+        //LobbyNetworkManager.OnClientConnected -= HandleClientConnected;
+       // LobbyNetworkManager.OnClientDisconnected -= HandleClientDisconnected;
     }
 
     public void JoinLobby()

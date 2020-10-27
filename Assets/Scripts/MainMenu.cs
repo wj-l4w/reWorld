@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 public class MainMenu : MonoBehaviour
 {
     [Header("Network")]
-    [SerializeField] private LobbyNetworkManager networkManager = null;
+    [SerializeField] private NetworkManager networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
@@ -17,7 +18,8 @@ public class MainMenu : MonoBehaviour
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
+        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /*public void StartGame()
