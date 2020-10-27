@@ -5,11 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Network")]
+    [SerializeField] private LobbyNetworkManager networkManager = null;
+
+    [Header("UI")]
+    [SerializeField] private GameObject landingPagePanel = null;
     public GameObject settingsPanel;
-    public void StartGame()
+
+    public void HostLobby()
     {
-        SceneManager.LoadScene(1);
+        networkManager.StartHost();
+
+        landingPagePanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    /*public void StartGame()
+    {
+        SceneManager.LoadScene(mainMenuScene.name);
+    }*/
     
     public void ExitGame(){
         Debug.Log("Exit game");

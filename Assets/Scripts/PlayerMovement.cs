@@ -1,15 +1,16 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public float speed = 1f;
     private Vector2 movement;
     public  Rigidbody2D rb;
     public Animator animator;
 
-
+    [Client]
     void Update()
     {
         GetInput();
@@ -22,6 +23,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetInput()
     {
+        //This function will move EVERY player, which we dont want!
+        //Only move player objects that the player has authority over (their own characters)
+        if (!hasAuthority){
+            return;
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
