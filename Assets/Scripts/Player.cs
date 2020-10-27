@@ -25,10 +25,7 @@ public class Player : NetworkBehaviour
     public string playerNameStr;
 
     [Client]
-    void Start()
-    {
-        playerCam = Camera.main;
-    }
+    void Start() => playerCam = Camera.main;
 
     [Client]
     void Update()
@@ -59,9 +56,14 @@ public class Player : NetworkBehaviour
 
     private void Move()
     {
-        //Moving Camera
+        if (isLocalPlayer)
+        {
+            Vector3 newPosition = Vector3.Lerp(transform.position, transform.position + camOffset, camSmoothing);
+            playerCam.transform.position = newPosition;
+        }
+        /*//Moving Camera
         Vector3 newPosition = Vector3.Lerp(transform.position, transform.position + camOffset, camSmoothing);
-        playerCam.transform.position = newPosition;
+        playerCam.transform.position = newPosition;*/
         //Moving Player
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 

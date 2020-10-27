@@ -18,7 +18,8 @@ public class MainMenu : MonoBehaviour
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Additive);
+        networkManager.ServerChangeScene(networkManager.onlineScene);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
     }
 
