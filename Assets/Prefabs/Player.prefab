@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 7472178134586059850}
   - component: {fileID: 65635777960626777}
   - component: {fileID: 1432194869539852314}
+  - component: {fileID: 8006876335719082375}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -336,3 +337,19 @@ MonoBehaviour:
   camOffset: {x: 0, y: 0, z: -1}
   moveSpeed: 1
   playerNameStr: Paimon
+--- !u!114 &8006876335719082375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526274152983922931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.01
+  clientAuthority: 1
+  animator: {fileID: 8615028852854471531}
