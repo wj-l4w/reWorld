@@ -2,31 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mirror;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Network")]
-    [SerializeField] private NetworkManager networkManager = null;
-
-    [Header("UI")]
-    [SerializeField] private GameObject landingPagePanel = null;
     public GameObject settingsPanel;
-
-    public void HostLobby()
+    public void StartGame()
     {
-        networkManager.StartHost();
-
-        landingPagePanel.SetActive(false);
-        networkManager.ServerChangeScene(networkManager.onlineScene);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
-
-    /*public void StartGame()
-    {
-        SceneManager.LoadScene(mainMenuScene.name);
-    }*/
     
     public void ExitGame(){
         Debug.Log("Exit game");
