@@ -27,8 +27,9 @@ public class EnemyController : MonoBehaviour
             followPlayer();
             myAnim.SetBool("isAttacking",false);
         }
-        else if(Vector3.Distance(target.position, transform.position) < 1){
+        else if(Vector3.Distance(target.position, transform.position) < 0.5){
             isAttacking = true;
+            followPlayer();
 
             if(isAttacking){
                 attackCd -= Time.deltaTime;
