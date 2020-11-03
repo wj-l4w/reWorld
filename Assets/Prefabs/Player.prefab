@@ -336,9 +336,8 @@ MonoBehaviour:
   IPAddressTextBox: {fileID: 0}
   camSmoothing: 1
   camOffset: {x: 0, y: 0, z: -1}
-  moveSpeed: 1
+  moveSpeed: 3
   playerNameStr: Paimon
-  ipAddressText: 
 --- !u!114 &8006876335719082375
 MonoBehaviour:
   m_ObjectHideFlags: 0
