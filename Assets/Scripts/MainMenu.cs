@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 
+
 public class MainMenu : MonoBehaviour
 {
     [Header("Network")]
@@ -11,6 +12,7 @@ public class MainMenu : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
+
     public GameObject settingsPanel;
 
     public void HostLobby()
@@ -19,8 +21,6 @@ public class MainMenu : MonoBehaviour
 
         landingPagePanel.SetActive(false);
         networkManager.ServerChangeScene(networkManager.onlineScene);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     /*public void StartGame()
@@ -48,4 +48,8 @@ public class MainMenu : MonoBehaviour
         //TODO: Save into file
         settingsPanel.SetActive(false);
     }
+
+
+
+    
 }
