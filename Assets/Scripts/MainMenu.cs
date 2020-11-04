@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Mirror;
 
 
 public class MainMenu : MonoBehaviour
 {
+<<<<<<< HEAD
     [Header("Network")]
     [SerializeField] private NetworkManager networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
 
+=======
+>>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
     public GameObject settingsPanel;
-
-    public void HostLobby()
+    public void StartGame()
     {
+<<<<<<< HEAD
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
         networkManager.ServerChangeScene(networkManager.onlineScene);
+=======
+        SceneManager.LoadScene(1);
+>>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
     }
-
-    /*public void StartGame()
-    {
-        SceneManager.LoadScene(mainMenuScene.name);
-    }*/
     
     public void ExitGame(){
         Debug.Log("Exit game");
