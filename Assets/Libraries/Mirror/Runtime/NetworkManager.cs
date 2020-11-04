@@ -1492,11 +1492,6 @@ namespace Mirror
         /// </summary>
         public virtual void OnStopHost() { }
 
-        public void OnClientSceneChanged()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

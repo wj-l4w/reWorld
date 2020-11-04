@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using Mirror;
 <<<<<<< HEAD
 
-
 public class MainMenu : MonoBehaviour
 {
 <<<<<<< HEAD
@@ -24,6 +23,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject landingPagePanel = null;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
@@ -31,6 +31,8 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
 =======
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+=======
+>>>>>>> parent of ca62f8e... Added ip address text field
     public GameObject settingsPanel;
 
     public void HostLobby()
@@ -48,6 +50,7 @@ public class MainMenu : MonoBehaviour
         networkManager.ServerChangeScene(networkManager.onlineScene);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         SceneManager.LoadScene(1);
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
@@ -59,6 +62,10 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+=======
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
+>>>>>>> parent of ca62f8e... Added ip address text field
     }
 
     /*public void StartGame()
@@ -86,8 +93,4 @@ public class MainMenu : MonoBehaviour
         //TODO: Save into file
         settingsPanel.SetActive(false);
     }
-
-
-
-    
 }
