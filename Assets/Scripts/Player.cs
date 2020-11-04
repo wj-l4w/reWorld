@@ -111,6 +111,14 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
+    public string CmdGetLocalIPv4()
+    {
+        return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+        .ToString();
+
+    }
+
+    [Command]
     public void CmdSetupPlayer(string _name)
     {
         // player info sent to server, then server updates sync vars which handles it on all clients
