@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 using Mirror;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 3df7953... still reverting
 
 >>>>>>> parent of 9de681e... reverting to without networking
 
@@ -17,6 +20,7 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+<<<<<<< HEAD
 =======
 
 public class MainMenu : MonoBehaviour
@@ -30,6 +34,8 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of b696d40... reverting to without networking
 =======
 >>>>>>> parent of 9de681e... reverting to without networking
+=======
+>>>>>>> parent of 3df7953... still reverting
     [Header("Network")]
     [SerializeField] private NetworkManager networkManager = null;
 
@@ -39,8 +45,11 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 9de681e... reverting to without networking
+=======
+>>>>>>> parent of 3df7953... still reverting
 
 <<<<<<< HEAD
 =======
@@ -48,6 +57,7 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
 =======
@@ -56,9 +66,12 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of b696d40... reverting to without networking
 =======
 >>>>>>> parent of 9de681e... reverting to without networking
+=======
+>>>>>>> parent of 3df7953... still reverting
     public GameObject settingsPanel;
     public void StartGame()
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -72,6 +85,10 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of b696d40... reverting to without networking
 =======
 >>>>>>> parent of 9de681e... reverting to without networking
+=======
+=======
+>>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+>>>>>>> parent of 3df7953... still reverting
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
@@ -81,6 +98,9 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3df7953... still reverting
 =======
         SceneManager.LoadScene(1);
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
@@ -88,6 +108,7 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+<<<<<<< HEAD
 =======
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
@@ -103,6 +124,8 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(1);
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
 >>>>>>> parent of 9de681e... reverting to without networking
+=======
+>>>>>>> parent of 3df7953... still reverting
     }
     
     public void ExitGame(){
