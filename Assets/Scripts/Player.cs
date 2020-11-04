@@ -1,7 +1,9 @@
 ﻿using Mirror;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using TMPro;
 using UnityEngine;
+
 
 public class Player : NetworkBehaviour
 {
@@ -11,6 +13,7 @@ public class Player : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject playerNameObj;
     public Camera playerCam;
+    public TMP_Text IPAddressTextBox;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -25,7 +28,10 @@ public class Player : NetworkBehaviour
     public string playerNameStr;
 
     [Client]
-    void Start() => playerCam = Camera.main;
+    void Start()
+    {
+        playerCam = Camera.main;
+    }
 
     [Client]
     void Update()
@@ -56,14 +62,12 @@ public class Player : NetworkBehaviour
 
     private void Move()
     {
+        //Moving Camera
         if (isLocalPlayer)
         {
             Vector3 newPosition = Vector3.Lerp(transform.position, transform.position + camOffset, camSmoothing);
             playerCam.transform.position = newPosition;
         }
-        /*//Moving Camera
-        Vector3 newPosition = Vector3.Lerp(transform.position, transform.position + camOffset, camSmoothing);
-        playerCam.transform.position = newPosition;*/
         //Moving Player
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
@@ -83,7 +87,6 @@ public class Player : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-  
         Camera.main.transform.SetParent(transform);
         Camera.main.transform.localPosition = new Vector2(0, 0);
 
@@ -92,6 +95,12 @@ public class Player : NetworkBehaviour
 
         string name = PlayerNameInput.DisplayName;
         CmdSetupPlayer(name);
+    }
+    public string GetLocalIPv4()
+    {
+        return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+        .ToString();
+
     }
 
     [Command]

@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 8006876335719082375}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,10 +333,12 @@ MonoBehaviour:
   playerNameText: {fileID: 6511626792287405151}
   playerNameObj: {fileID: 8459611139113008347}
   playerCam: {fileID: 0}
+  IPAddressTextBox: {fileID: 0}
   camSmoothing: 1
   camOffset: {x: 0, y: 0, z: -1}
   moveSpeed: 1
   playerNameStr: Paimon
+  ipAddressText: 
 --- !u!114 &8006876335719082375
 MonoBehaviour:
   m_ObjectHideFlags: 0

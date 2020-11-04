@@ -13,6 +13,7 @@ using Mirror;
 
 >>>>>>> parent of 9de681e... reverting to without networking
 
+
 public class MainMenu : MonoBehaviour
 {
 <<<<<<< HEAD
@@ -46,10 +47,13 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 9de681e... reverting to without networking
 =======
 >>>>>>> parent of 3df7953... still reverting
+=======
+>>>>>>> parent of 006247c... reverting
 
 <<<<<<< HEAD
 =======
@@ -60,6 +64,7 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 =======
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+<<<<<<< HEAD
 =======
 >>>>>>> parent of ca62f8e... Added ip address text field
 =======
@@ -68,6 +73,8 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of 9de681e... reverting to without networking
 =======
 >>>>>>> parent of 3df7953... still reverting
+=======
+>>>>>>> parent of 006247c... reverting
     public GameObject settingsPanel;
     public void StartGame()
     {
@@ -99,8 +106,11 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 3df7953... still reverting
+=======
+>>>>>>> parent of 006247c... reverting
 =======
         SceneManager.LoadScene(1);
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
@@ -113,6 +123,7 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+<<<<<<< HEAD
 =======
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
@@ -126,6 +137,8 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of 9de681e... reverting to without networking
 =======
 >>>>>>> parent of 3df7953... still reverting
+=======
+>>>>>>> parent of 006247c... reverting
     }
     
     public void ExitGame(){
@@ -148,4 +161,8 @@ public class MainMenu : MonoBehaviour
         //TODO: Save into file
         settingsPanel.SetActive(false);
     }
+
+
+
+    
 }
