@@ -2,31 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 
 public class MainMenu : MonoBehaviour
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
     [Header("Network")]
     [SerializeField] private NetworkManager networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
+=======
+>>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
     public GameObject settingsPanel;
-    public void StartGame()
+
+    public void HostLobby()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
         networkManager.ServerChangeScene(networkManager.onlineScene);
+<<<<<<< HEAD
 =======
         SceneManager.LoadScene(1);
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
+=======
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
+>>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
     }
+
+    /*public void StartGame()
+    {
+        SceneManager.LoadScene(mainMenuScene.name);
+    }*/
     
     public void ExitGame(){
         Debug.Log("Exit game");
