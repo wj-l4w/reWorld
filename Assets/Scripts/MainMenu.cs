@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+<<<<<<< HEAD
 
 
 public class MainMenu : MonoBehaviour
@@ -11,29 +12,41 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+=======
+
+public class MainMenu : MonoBehaviour
+{
+>>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
     [Header("Network")]
     [SerializeField] private NetworkManager networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+=======
+>>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
     public GameObject settingsPanel;
 
     public void HostLobby()
     {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+=======
+>>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
         networkManager.ServerChangeScene(networkManager.onlineScene);
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         SceneManager.LoadScene(1);
@@ -42,6 +55,10 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
+=======
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
+>>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
     }
 
     /*public void StartGame()
