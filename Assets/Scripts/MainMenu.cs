@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 public class MainMenu : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class MainMenu : MonoBehaviour
 public class MainMenu : MonoBehaviour
 {
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+=======
+
+
+public class MainMenu : MonoBehaviour
+{
+>>>>>>> parent of b696d40... reverting to without networking
     [Header("Network")]
     [SerializeField] private NetworkManager networkManager = null;
 
@@ -25,6 +32,7 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 15ed22f... Merge branch 'master' into KhaiXian
 =======
@@ -33,6 +41,8 @@ public class MainMenu : MonoBehaviour
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
 =======
 >>>>>>> parent of ca62f8e... Added ip address text field
+=======
+>>>>>>> parent of b696d40... reverting to without networking
     public GameObject settingsPanel;
 
     public void HostLobby()
@@ -40,14 +50,18 @@ public class MainMenu : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 94c0a9b... fixed github issues on "TseWeoi" branch
 =======
 >>>>>>> parent of 354de03... Merge pull request #11 from InstaKarma5-1/TseWeoiNewBitccchh
+=======
+>>>>>>> parent of b696d40... reverting to without networking
         networkManager.StartHost();
 
         landingPagePanel.SetActive(false);
         networkManager.ServerChangeScene(networkManager.onlineScene);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -66,6 +80,8 @@ public class MainMenu : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.MoveGameObjectToScene(this.Player, SceneManager.GetActiveScene().buildIndex + 1);
 >>>>>>> parent of ca62f8e... Added ip address text field
+=======
+>>>>>>> parent of b696d40... reverting to without networking
     }
 
     /*public void StartGame()
