@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Player : NetworkBehaviour
@@ -14,13 +15,22 @@ public class Player : NetworkBehaviour
     public GameObject playerNameObj;
     public Camera playerCam;
     public TMP_Text IPAddressTextBox;
+    public NPC npc;
 
     [Header("Camera")]
     public float camSmoothing;
     public Vector3 camOffset;
 
-    [Header("Tuning Stats")]
+    [Header("Stats")]
     public float moveSpeed = 1f;
+    public int maxHp = 100;
+    //m = mage, w = warrior
+    [SyncVar]
+    public char playerClass = 'w';
+    [SyncVar]
+    public int currentHp;
+    [SyncVar]
+    public bool canShoot = false;
 
     private Vector2 movement;
 
@@ -58,6 +68,27 @@ public class Player : NetworkBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        //Talking to NPC
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            npc = GameObject.FindObjectOfType<NPC>();
+
+            if (Input.GetKeyDown(KeyCode.Space) && npc.playerInRange)
+            {
+                if (npc.dialogBox.activeInHierarchy)
+                {
+                    npc.dialogBox.SetActive(false);
+                }
+                else
+                {
+                    npc.dialogBox.SetActive(true);
+                    npc.dialogText.text = npc.dialog;
+                    npc.player = this;
+                }
+            }
+        }
+        
     }
 
     private void Move()
@@ -96,11 +127,11 @@ public class Player : NetworkBehaviour
         string name = PlayerNameInput.DisplayName;
         CmdSetupPlayer(name);
     }
+
     // public string GetLocalIPv4()
     // {
     //     return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
     //     .ToString();
-
     // }
 
     [Command]
@@ -109,5 +140,7 @@ public class Player : NetworkBehaviour
         // player info sent to server, then server updates sync vars which handles it on all clients
         playerNameStr = _name;
     }
+
+
 
 }
