@@ -103,14 +103,6 @@ public class Player : NetworkBehaviour
 
     // }
 
-    // [Command]
-    // public string CmdGetLocalIPv4()
-    // {
-    //     return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-    //     .ToString();
-
-    // }
-
     [Command]
     public void CmdSetupPlayer(string _name)
     {
