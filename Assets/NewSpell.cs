@@ -30,7 +30,7 @@ public class NewSpell : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(speed * Time.deltaTime, speed * Time.deltaTime, 0);
+        transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
     void DestroyProjectile()
