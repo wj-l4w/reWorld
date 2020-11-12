@@ -2439,12 +2439,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 840593945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8264951b1b6354249862f64e619f36ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   runInBackground: 1
-  autoStartServerBuild: 0
+  autoStartServerBuild: 1
   showDebugMessages: 0
   serverTickRate: 30
   offlineScene: Assets/Scenes/MainMenu.unity
@@ -2459,7 +2459,11 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18, type: 3}
+  - {fileID: 8526274152983922931, guid: da7ec8fccea5b4b4ea1b8d40cca4082a, type: 3}
+  GargoyleNPC: {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18,
+    type: 3}
 --- !u!114 &840593947
 MonoBehaviour:
   m_ObjectHideFlags: 0

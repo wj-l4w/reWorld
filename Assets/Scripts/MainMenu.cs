@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
-
+using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
     [Header("Network")]
-    [SerializeField] private NetworkManager networkManager = null;
+    [SerializeField] private NetworkManager2 networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
 
     public GameObject settingsPanel;
+    
 
     public void HostLobby()
     {
