@@ -7,17 +7,30 @@ public class NPC : NetworkBehaviour
 {
     public GameObject dialogBox;
     public Text dialogText;
-    public string dialog;
+    public string dialog = "What class will you choose?";
     public bool playerInRange;
     private Queue<string> sentences;
-    public Player player;
 
-    // Start is called before the first frame update
-    void Start()
+/*    void Start()
     {
-        dialogBox.SetActive(false);
         sentences = new Queue<string>();
+        dialogBox = GameObject.Find("Dialog Box Canvas");
+        dialogText = GameObject.Find("Dialog Box Canvas/Dialog box/DialogText").GetComponent<Text>();
     }
+*/
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        sentences = new Queue<string>();
+        dialogBox = GameObject.Find("Dialog Box Canvas");
+        dialogText = GameObject.Find("Dialog Box Canvas/Dialog box/DialogText").GetComponent<Text>();
+        if (dialogBox.activeInHierarchy)
+        {
+            dialogBox.SetActive(false);
+        }
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
@@ -62,14 +75,17 @@ public class NPC : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSelectWarriorClass()
+    public void rpcRequestWarriorClass(uint id)
     {
-       player.playerClass = 'w';
+        Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
+        player.playerClass = 'w';
     }
 
     [ClientRpc]
-    public void RpcSelectMageClass()
+    public void rpcRequestMageClass(uint id)
     {
+        Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         player.playerClass = 'm';
     }
+
 }

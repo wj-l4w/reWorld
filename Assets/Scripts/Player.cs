@@ -15,7 +15,6 @@ public class Player : NetworkBehaviour
     public GameObject playerNameObj;
     public Camera playerCam;
     public TMP_Text IPAddressTextBox;
-    public NPC npc;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -72,20 +71,15 @@ public class Player : NetworkBehaviour
         //Talking to NPC
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            npc = GameObject.FindObjectOfType<NPC>();
-
+            NPC npc = GameObject.FindObjectOfType<NPC>();
+            LobbyManager lobby = GameObject.FindObjectOfType<LobbyManager>();
             if (Input.GetKeyDown(KeyCode.Space) && npc.playerInRange)
             {
-                if (npc.dialogBox.activeInHierarchy)
-                {
-                    npc.dialogBox.SetActive(false);
-                }
-                else
-                {
+                if (!npc.dialogBox.activeInHierarchy) {
                     npc.dialogBox.SetActive(true);
                     npc.dialogText.text = npc.dialog;
-                    npc.player = this;
-                }
+                    lobby.player = this;
+                }                
             }
         }
         
@@ -141,6 +135,18 @@ public class Player : NetworkBehaviour
         playerNameStr = _name;
     }
 
+    [Command]
+    public void CmdRequestWarriorClass()
+    {
+        NPC npc = FindObjectOfType<NPC>();
+        npc.rpcRequestWarriorClass(this.netIdentity.netId);
+    }
 
+    [Command]
+    public void CmdRequestMageClass()
+    {
+        NPC npc = FindObjectOfType<NPC>();
+        npc.rpcRequestMageClass(this.netIdentity.netId);
+    }
 
 }

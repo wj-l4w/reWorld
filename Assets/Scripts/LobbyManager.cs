@@ -1,18 +1,20 @@
 ﻿using Mirror;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using TMPro;
+using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class LobbyManager : NetworkBehaviour
 {
+    public Player player;
+    public Button warrior, mage;
+    
     private void Start()
     {
-        
+        player = FindObjectOfType<Player>();
+        warrior.onClick.AddListener(() => { player.CmdRequestMageClass();});
+        mage.onClick.AddListener(() => { player.CmdRequestMageClass();});
     }
+
+
+
 }
