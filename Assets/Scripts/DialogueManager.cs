@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class DialogueManager : MonoBehaviour
 {
     
-    private Queue<string> sentences;
+    /*private Queue<string> sentences;
+    public Player player;
 
     void Start()
     {
@@ -38,8 +40,12 @@ public class DialogueManager : MonoBehaviour
 
     public void ChooseWarriorClass(){
         Debug.Log("Player has chosen warrior");
+        RpcSelectWarriorClass();
     }
     public void ChooseMageClass(){
         Debug.Log("Player has chosen mage");
-    }
+        RpcSelectMageClass();
+    }*/
+
+
 }

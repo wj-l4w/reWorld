@@ -798,6 +798,7 @@ namespace Mirror
         /// <para>Loading a scene manually wont set networkSceneName, so Mirror would still load it again on start.</para>
         /// </remarks>
         public static string networkSceneName { get; protected set; } = "";
+        public Action OnClientConnected { get; set; }
 
         public static UnityEngine.AsyncOperation loadingSceneAsync;
 
