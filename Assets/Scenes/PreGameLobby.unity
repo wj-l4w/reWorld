@@ -486,7 +486,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4082921511705547929, guid: 3b368045d1bf12248a5b56c324074229,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -724,6 +724,10 @@ MonoBehaviour:
   camSmoothing: 0
   camOffset: {x: 0, y: 0, z: 0}
   moveSpeed: 1
+  maxHp: 100
+  playerClass: 119
+  currentHp: 0
+  canShoot: 0
   playerNameStr: 
 --- !u!50 &395982734
 Rigidbody2D:
@@ -811,6 +815,10 @@ MonoBehaviour:
   camSmoothing: 0
   camOffset: {x: 0, y: 0, z: 0}
   moveSpeed: 1
+  maxHp: 100
+  playerClass: 119
+  currentHp: 0
+  canShoot: 0
   playerNameStr: 
 --- !u!61 &410962192
 BoxCollider2D:
@@ -895,7 +903,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4082921511705547929, guid: 3b368045d1bf12248a5b56c324074229,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -966,8 +974,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8480ed935514b4687c710b3e43aa1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipAddressTextBox: {fileID: 765159627}
-  networkManager: {fileID: 0}
+  syncMode: 0
+  syncInterval: 0.1
+  player: {fileID: 0}
+  warrior: {fileID: 0}
+  mage: {fileID: 0}
 --- !u!1 &597773938
 GameObject:
   m_ObjectHideFlags: 0
@@ -5786,6 +5797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c926361858eba3b42a1551f3434ce111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   dialogBox: {fileID: 66173646}
   dialogText: {fileID: 2077419523}
   dialog: What class will you choose?
