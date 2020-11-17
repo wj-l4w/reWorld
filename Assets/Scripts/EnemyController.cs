@@ -41,7 +41,6 @@ public class EnemyController : MonoBehaviour
                         attackCd = 1f;
                         attackAnimCd = 0.45f;
                     }
-                    
                 }
             }
             
