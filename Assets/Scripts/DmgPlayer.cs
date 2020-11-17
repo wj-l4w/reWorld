@@ -51,6 +51,11 @@ public class DmgPlayer : MonoBehaviour
         }  
     }
     
+    private void OnCollisionExit2D(Collision2D other) {
+        if(other.collider.tag == "Player"){
+            isAttacking = false;
+        }
+    }
     // private void OnCollisionStay2D(Collision2D other) {
     //     isTouching = true;
 

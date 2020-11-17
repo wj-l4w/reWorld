@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
         }
         else if(Vector3.Distance(target.position, transform.position) < 1){
             isAttacking = true;
+            followPlayer();
 
             if(isAttacking){
                 attackCd -= Time.deltaTime;
@@ -41,7 +42,6 @@ public class EnemyController : MonoBehaviour
                         attackCd = 1f;
                         attackAnimCd = 0.45f;
                     }
-                    
                 }
             }
             
