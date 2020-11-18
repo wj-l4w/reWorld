@@ -7,14 +7,18 @@ public class EnemyController : NetworkBehaviour
 {
     private Animator myAnim;
     private Transform target;
+    [SyncVar]
     public Transform homePos;
     public DmgPlayer dp;
     private float attackCd = 0f;
     private float attackAnimCd = 0.5f;
     private bool isAttacking;
-    [SerializeField] private float speed = 0f;
-    [SerializeField] private float minRange = 0f;
-    [SerializeField] private float maxRange = 0f;
+    [SyncVar]
+    [SerializeField] public float speed = 0f;
+    [SyncVar]
+    [SerializeField] public float minRange = 0f;
+    [SyncVar]
+    [SerializeField] public float maxRange = 0f;
 
 
     void Start()

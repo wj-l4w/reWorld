@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8795341600673908241}
   - component: {fileID: 3041188034199540661}
   - component: {fileID: 2824201283921134262}
+  - component: {fileID: -8783881062468709440}
   m_Layer: 0
   m_Name: Gargoyle NPC
   m_TagString: Untagged
@@ -181,6 +182,19 @@ MonoBehaviour:
   dialogText: {fileID: 0}
   dialog: What class will you choose?
   playerInRange: 0
-  mageButton: {fileID: 0}
-  warriorButton: {fileID: 0}
-  player: {fileID: 0}
+--- !u!114 &-8783881062468709440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795341600673908253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 8795341600673908247}
