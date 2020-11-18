@@ -17,16 +17,6 @@ public class EnemySpawner : NetworkBehaviour
     private float randomX, randomY;
     private Vector2 spawnPos;
 
-    private void Start()
-    {
-        //respawn only -> StartCoroutine(SpawnGolem());
-        initialSpawn(Enemies[0], 6);
-        initialSpawn(Enemies[1], 4);
-        initialSpawn(Enemies[2], 1);
-        initialSpawn(Enemies[3], 6);
-        initialSpawn(Enemies[4], 4);
-    }
-
 /*    
       ---USE THIS FOR RESPAWN SYSTEM---
       --SPAWNS ENEMY ONE BY ONE WITH DELAY--
@@ -43,8 +33,9 @@ public class EnemySpawner : NetworkBehaviour
     }
 */
 
-    private void initialSpawn(GameObject enemy, int loopCount)
+    public void initialSpawn(GameObject enemy, int loopCount)
     {
+        NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
         for (int i = 1; i <= loopCount; i++)
         {
             //Getting a random spawn postition from list
