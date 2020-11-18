@@ -54,7 +54,7 @@ public class LobbyManager : NetworkBehaviour
                 playersReady++;
             }
 
-            //Check plyaer class and update UI
+            //Check player class and update UI
             if(player.playerClass == 'm')
             {
                 classNameText.text = "Current class:Mage";

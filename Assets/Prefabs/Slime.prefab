@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7335490705056631627}
   - component: {fileID: 7335490705056631620}
   - component: {fileID: 7335490705056631621}
+  - component: {fileID: -4766896809856680314}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -166,7 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecda2f446b48ab4ea3e98b5212d803c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   homePos: {fileID: 0}
+  dp: {fileID: 7335490705056631620}
   speed: 2
   minRange: 0.5
   maxRange: 2
@@ -182,6 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6d1599168131943a3976111f49912e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  target: {fileID: 0}
   DmgToGive: 10
 --- !u!114 &7335490705056631621
 MonoBehaviour:
@@ -195,5 +202,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c442cf53e74afce4cb3f7175ac45db42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   currentHealth: 10
   maxHealth: 10
+--- !u!114 &-4766896809856680314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335490705056631622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0

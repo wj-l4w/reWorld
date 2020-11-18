@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
-public class DmgPlayer : MonoBehaviour
+public class DmgPlayer : NetworkBehaviour
 {
     private HealthManager healthMan;
+    public Player target;
     private float DmgCd = 0f;
     private bool isTouching;
     private bool isAttacking;
@@ -33,16 +35,31 @@ public class DmgPlayer : MonoBehaviour
         //         DmgCd = 2f;
         //     }
         // }
-        if(isAttacking){
+
+        attack();
+
+    }
+
+    
+    private void attack()
+    {
+        if (isAttacking)
+        {
             DmgCd -= Time.deltaTime;
-            if(DmgCd <= 0){
-                healthMan.DmgPlayer(DmgToGive);
+            if (DmgCd <= 0)
+            {
+                RpcDamage(target.connectionToClient);
                 DmgCd = 2f;
             }
         }
-        
     }
-    
+
+    [TargetRpc]
+    public void RpcDamage(NetworkConnection conn)
+    {
+        target.currentHealth -= DmgToGive;
+    }
+
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.collider.tag == "Player"){
             //other.gameObject.GetComponent<HealthManager>().DmgPlayer(DmgToGive);
@@ -50,7 +67,17 @@ public class DmgPlayer : MonoBehaviour
             // reloading = true;
         }  
     }
-    
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.tag == "Player")
+        {
+            //other.gameObject.GetComponent<HealthManager>().DmgPlayer(DmgToGive);
+            isAttacking = false;
+            // reloading = true;
+        }
+    }
+
     // private void OnCollisionStay2D(Collision2D other) {
     //     isTouching = true;
 
