@@ -11,7 +11,6 @@ public class NetworkManager2 : NetworkManager
     public GameObject GargoyleNPC;
     public GameObject SignBoard;
 
-
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName);
@@ -21,22 +20,6 @@ public class NetworkManager2 : NetworkManager
             SpawnStuffs();
         }
     }
-
-/*    public override void OnServerAddPlayer(NetworkConnection conn)
-    {
-        Transform startPos = GetStartPosition();
-        GameObject player = startPos != null
-            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
-
-        NetworkServer.AddPlayerForConnection(conn, player);
-
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            LobbyManager lobby = FindObjectOfType<LobbyManager>();
-            lobby.player.Append<GameObject>(player.GetComponent<Player>);
-        }
-    }*/
 
     public void SpawnStuffs()
     {
