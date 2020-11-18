@@ -1,8 +1,10 @@
 ﻿using Mirror;
+using System;
 using System.Linq;
 using System.Net;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -26,6 +28,8 @@ public class Player : NetworkBehaviour
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass = 'w';
+    [SyncVar]
+    public bool isReady = false;
     [SyncVar]
     public int currentHp;
     [SyncVar]
@@ -120,13 +124,13 @@ public class Player : NetworkBehaviour
 
         string name = PlayerNameInput.DisplayName;
         CmdSetupPlayer(name);
-    }
 
-    // public string GetLocalIPv4()
-    // {
-    //     return Dns.GetHostEntry(Dns.GetHostName()).AddressList.First(f => f.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-    //     .ToString();
-    // }
+        //If player is host and client
+        if (!isClientOnly)
+        {
+            isReady = true;
+        }
+    }
 
     [Command]
     public void CmdSetupPlayer(string _name)
@@ -149,4 +153,32 @@ public class Player : NetworkBehaviour
         npc.rpcRequestMageClass(this.netIdentity.netId);
     }
 
+    [Command]
+    public void CmdReadyUp()
+    {
+        LobbyManager lobbyManager = FindObjectOfType<LobbyManager>();
+        lobbyManager.rpcReady(this.netIdentity.netId);
+    }
+
+    [Command]
+    public void CmdStartGame()
+    {
+        LobbyManager lobbyManager = FindObjectOfType<LobbyManager>();
+        lobbyManager.rpcStartGame();
+    }
+
+    [Command]
+    public void CmdActivateSignboard()
+    {
+        SignBoardCollider sbc = FindObjectOfType<SignBoardCollider>();
+        sbc.rpcSignboardActivate(this.connectionToClient);
+    }
+
+
+    [Command]
+    public void CmdDeactivateSignboard()
+    {
+        SignBoardCollider sbc = FindObjectOfType<SignBoardCollider>();
+        sbc.rpcSignboardDeactivate(this.connectionToClient);
+    }
 }
