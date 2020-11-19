@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class EnemyHealthManager : NetworkBehaviour
+public class EnemyHealthManager : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    [ClientRpc]
-    public void cmdHurtEnemy(int dmgToGive){
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void HurtEnemy(int dmgToGive){
         currentHealth -= dmgToGive;
         if(currentHealth <=0 ){
-            //Despawn if die
             Destroy(gameObject);
-            NetworkServer.Destroy(gameObject);
-
-            //Give rewards
         }
     }
 }

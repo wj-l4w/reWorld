@@ -1,42 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class EnemyController : NetworkBehaviour
+public class EnemyController : MonoBehaviour
 {
     private Animator myAnim;
     private Transform target;
-    [SyncVar]
     public Transform homePos;
-    public DmgPlayer dp;
     private float attackCd = 0f;
     private float attackAnimCd = 0.5f;
     private bool isAttacking;
-    [SyncVar]
-    [SerializeField] public float speed = 0f;
-    [SyncVar]
-    [SerializeField] public float minRange = 0f;
-    [SyncVar]
-    [SerializeField] public float maxRange = 0f;
+    [SerializeField] private float speed = 0f;
+    [SerializeField] private float minRange = 0f;
+    [SerializeField] private float maxRange = 0f;
 
 
     void Start()
     {
         myAnim = GetComponent<Animator>();
-        dp = GetComponent<DmgPlayer>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     void Update()
     {
-        GameObject targetPlayer = FindClosestPlayer();
-        if (targetPlayer == null) { return; }
-
-        target = targetPlayer.transform;
-        dp.target = targetPlayer.GetComponent<Player>();
-
-        
-
         if(Vector3.Distance(target.position, transform.position) <= maxRange && Vector3.Distance(target.position, transform.position) >= minRange){
             followPlayer();
             myAnim.SetBool("isAttacking",false);
@@ -81,25 +67,5 @@ public class EnemyController : NetworkBehaviour
             myAnim.SetBool("isMoving", false);
         }
         transform.position = Vector3.MoveTowards(transform.position, homePos.position, speed * Time.deltaTime);
-    }
-
-    public GameObject FindClosestPlayer()
-    {
-        GameObject[] player;
-        player = GameObject.FindGameObjectsWithTag("Player");
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach (GameObject go in player)
-        {
-            Vector3 diff = go.transform.position - position;
-            float currentDistance = diff.sqrMagnitude;
-            if (currentDistance < distance)
-            {
-                closest = go;
-                distance = currentDistance;
-            }
-        }
-        return closest;
     }
 }
