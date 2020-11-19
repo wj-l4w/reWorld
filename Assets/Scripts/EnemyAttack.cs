@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Mirror;
 
-public class EnemyAttack : MonoBehaviour
+public class EnemyAttack : NetworkBehaviour
 {
-    private HealthManager healthMan;
-    private float DmgCd = 0f;
-    private bool isAttacking;
+    public Player target;
+    public float DmgCd = 0f;
+    private float atkCd;
+    private bool isAttacking = false;
     [SerializeField] private int DmgToGive = 10;
     // Start is called before the first frame update
     void Start()
     {
-        healthMan = FindObjectOfType<HealthManager>();
     }
 
     // Update is called once per frame
@@ -25,16 +25,10 @@ public class EnemyAttack : MonoBehaviour
             }
         }*/
 
-        if(isAttacking){
-            DmgCd -= Time.deltaTime;
-            if(DmgCd <= 0){
-                healthMan.DmgPlayer(DmgToGive);
-                DmgCd = 0.5f;
-            }
-        }
-        
+        attack();
+
     }
-    
+
     /*private void OnCollisionEnter2D(Collision2D other) {
         if(other.collider.tag == "Player"){
             other.gameObject.GetComponent<HealthManager>().DmgPlayer(dmgGiven);
@@ -42,11 +36,34 @@ public class EnemyAttack : MonoBehaviour
         }  
     }
     */
-    private void OnCollisionEnter2D(Collision2D other) {
-        isAttacking = true;
-    }
     private void OnCollisionStay2D(Collision2D other) {
         isAttacking = true;
-
     }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        isAttacking = false;
+    }
+
+    private void attack()
+    {
+        if (isAttacking)
+        {
+            atkCd -= Time.deltaTime;
+            if (atkCd <= 0)
+            {
+                rpcDmgPlayer(target.connectionToClient, DmgToGive);
+                atkCd = DmgCd;
+            }
+        }
+    }
+
+    [TargetRpc]
+    public void rpcDmgPlayer(NetworkConnection conn, int DmgToGive)
+    {
+        target.takeDamage(DmgToGive);
+        EnemyAttack ea = GetComponent<EnemyAttack>();
+        Debug.Log(ea.netId + " has hit player " + target.netId + " for " + DmgToGive + " damage");
+    }
+
+
 }

@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : NetworkBehaviour
 {
     private Animator myAnim;
     private Transform target;
+    //public EnemyAttack enemyAttack;
+    [SyncVar]
     public Transform homePos;
-    private float attackCd = 0f;
+    private float attackCd = 1f;
     private float attackAnimCd = 0.5f;
     private bool isAttacking;
+    private Player targetPlayer;
+    [SerializeField] private int damage;
     [SerializeField] private float speed = 0f;
     [SerializeField] private float minRange = 0f;
     [SerializeField] private float maxRange = 0f;
@@ -18,11 +23,15 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         myAnim = GetComponent<Animator>();
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        //enemyAttack = GetComponent<EnemyAttack>();
     }
 
     void Update()
     {
+        targetPlayer = FindClosestPlayer().GetComponent<Player>();
+        target = targetPlayer.transform;
+        //enemyAttack.target = targetPlayer.GetComponent<Player>();
+
         if(Vector3.Distance(target.position, transform.position) <= maxRange && Vector3.Distance(target.position, transform.position) >= minRange){
             followPlayer();
             myAnim.SetBool("isAttacking",false);
@@ -40,6 +49,7 @@ public class EnemyController : MonoBehaviour
                     if(attackAnimCd <= 0){
                         attackCd = 1f;
                         attackAnimCd = 0.45f;
+                        rpcDmgPlayer(targetPlayer.connectionToClient, damage);
                     }
                     
                 }
@@ -68,4 +78,41 @@ public class EnemyController : MonoBehaviour
         }
         transform.position = Vector3.MoveTowards(transform.position, homePos.position, speed * Time.deltaTime);
     }
+
+    public GameObject FindClosestPlayer()
+    {
+        GameObject[] players;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject closest = null;
+        float shortestDistance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (GameObject go in players)
+        {
+            Vector3 diff = go.transform.position - position;
+            float currentDistance = diff.sqrMagnitude;
+            if (currentDistance < shortestDistance)
+            {
+                closest = go;
+                shortestDistance = currentDistance;
+            }
+        }
+        return closest;
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        isAttacking = true;
+    }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        isAttacking = false;
+    }
+
+    [TargetRpc]
+    public void rpcDmgPlayer(NetworkConnection conn, int DmgToGive)
+    {
+        targetPlayer.takeDamage(DmgToGive);
+        Debug.Log(netId + " has hit player " + targetPlayer.netId + " for " + DmgToGive + " damage");
+    }
 }
+

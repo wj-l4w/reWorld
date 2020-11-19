@@ -18,10 +18,5 @@ public class HealthManager : MonoBehaviour
         
     }
 
-    public void DmgPlayer(int DmgToGive){
-        currentHealth -= DmgToGive;
-        if(currentHealth <= 0){
-            gameObject.SetActive(false);
-        }
-    }
+
 }

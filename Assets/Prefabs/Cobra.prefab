@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4343291752090017075}
   - component: {fileID: 4343291752090017076}
   - component: {fileID: 4343291752090017077}
-  - component: {fileID: 4343291752090017078}
   - component: {fileID: 4343291752090017079}
   - component: {fileID: -5983937873819589790}
   - component: {fileID: -5422711209205936694}
@@ -33,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4343291752090017080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.39, y: 8.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -168,23 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecda2f446b48ab4ea3e98b5212d803c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   homePos: {fileID: 0}
+  damage: 6
   speed: 2.5
   minRange: 0.5
   maxRange: 3
---- !u!114 &4343291752090017078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4343291752090017080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e6d1599168131943a3976111f49912e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DmgToGive: 10
 --- !u!114 &4343291752090017079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c442cf53e74afce4cb3f7175ac45db42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   currentHealth: 10
   maxHealth: 10
 --- !u!114 &-5983937873819589790

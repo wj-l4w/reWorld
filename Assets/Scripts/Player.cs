@@ -16,7 +16,6 @@ public class Player : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject playerNameObj;
     public Camera playerCam;
-    public TMP_Text IPAddressTextBox;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -24,14 +23,15 @@ public class Player : NetworkBehaviour
 
     [Header("Stats")]
     public float moveSpeed = 1f;
-    public int maxHp = 100;
+    
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass = 'w';
     [SyncVar]
     public bool isReady = false;
-    [SyncVar]
+    [SyncVar(hook = "OnChangeHealth")]
     public int currentHp;
+    public int maxHp = 100;
     [SyncVar]
     public bool canShoot = false;
 
@@ -44,6 +44,8 @@ public class Player : NetworkBehaviour
     void Start()
     {
         playerCam = Camera.main;
+        maxHp = 100;
+        currentHp = maxHp;
     }
 
     [Client]
@@ -114,6 +116,11 @@ public class Player : NetworkBehaviour
         playerNameText.text = playerNameStr;
     }
 
+    void OnChangeHealth(int Old, int _New)
+    {
+        currentHp = _New;
+    }
+
     public override void OnStartLocalPlayer()
     {
         Camera.main.transform.SetParent(transform);
@@ -181,4 +188,35 @@ public class Player : NetworkBehaviour
         SignBoardCollider sbc = FindObjectOfType<SignBoardCollider>();
         sbc.rpcSignboardDeactivate(this.connectionToClient);
     }
+
+    public void takeDamage(int dmg)
+    {
+        if (isServer)
+        {
+            currentHp -= dmg;
+        }
+        else
+        {
+            CmdTakeDamage(dmg);
+        }
+
+        
+        if (currentHp <= 0)
+        {
+            die();
+        }
+    }
+
+    [Command]
+    public void CmdTakeDamage(int dmg)
+    {
+        takeDamage(dmg);
+    }
+
+    private void die()
+    {
+        Debug.Log("Player " + netId + " has died");
+    }
+
+
 }
