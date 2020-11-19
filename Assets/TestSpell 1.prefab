@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2185058020038058067}
   - component: {fileID: 2185058020038058064}
   - component: {fileID: 2185058020038058065}
-  - component: {fileID: 2821138159089636360}
+  - component: {fileID: 9155318145238946729}
   m_Layer: 0
   m_Name: TestSpell 1
   m_TagString: Untagged
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2821138159089636360
+--- !u!114 &9155318145238946729
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2185058020038058060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e10070a6df0164a8be3237d3206202, type: 3}
+  m_Script: {fileID: 11500000, guid: 52c0fe9c125d46c42a7797624ad2636b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  speed: 10
+  lifeTime: 0.5
+  damage: 20
