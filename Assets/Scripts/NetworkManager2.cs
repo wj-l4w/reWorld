@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
 using System.Linq;
+using System;
 
 public class NetworkManager2 : NetworkManager
 {
     [Header("Game Objects")]
     public GameObject GargoyleNPC;
     public GameObject SignBoard;
-
+    public EnemySpawner es;
 
     public override void OnServerSceneChanged(string sceneName)
     {
@@ -19,24 +20,25 @@ public class NetworkManager2 : NetworkManager
         {
             Debug.Log("Server scene changed to PreGameLobby");
             SpawnStuffs();
+            
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            Debug.Log("Server scene changed to Map 2");
+            es = FindObjectOfType<EnemySpawner>();
+            spawnMobs();
+
         }
     }
 
-/*    public override void OnServerAddPlayer(NetworkConnection conn)
+    private void spawnMobs()
     {
-        Transform startPos = GetStartPosition();
-        GameObject player = startPos != null
-            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
-
-        NetworkServer.AddPlayerForConnection(conn, player);
-
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            LobbyManager lobby = FindObjectOfType<LobbyManager>();
-            lobby.player.Append<GameObject>(player.GetComponent<Player>);
-        }
-    }*/
+        es.initialSpawn(es.Enemies[0], 6);
+        es.initialSpawn(es.Enemies[1], 4);
+        es.initialSpawn(es.Enemies[2], 1);
+        es.initialSpawn(es.Enemies[3], 6);
+        es.initialSpawn(es.Enemies[4], 4);
+    }
 
     public void SpawnStuffs()
     {
