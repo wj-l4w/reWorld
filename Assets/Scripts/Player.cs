@@ -24,15 +24,14 @@ public class Player : NetworkBehaviour
 
     [Header("Stats")]
     public float moveSpeed = 1f;
+    public int maxHp = 100;
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass = 'w';
     [SyncVar]
     public bool isReady = false;
     [SyncVar]
-    public int currentHealth;
-    [SyncVar]
-    public int maxHealth;
+    public int currentHp;
     [SyncVar]
     public bool canShoot = false;
 
@@ -45,15 +44,12 @@ public class Player : NetworkBehaviour
     void Start()
     {
         playerCam = Camera.main;
-        maxHealth = 100;
-        currentHealth = maxHealth;
     }
 
     [Client]
     void Update()
     {
         GetInput();
-        DeathCheck();
     }
 
     private void FixedUpdate()
@@ -111,14 +107,6 @@ public class Player : NetworkBehaviour
             playerNameObj.transform.LookAt(Camera.main.transform);
             return;
         }*/
-    }
-    private void DeathCheck()
-    {
-        if (currentHealth <= 0)
-        {
-            //Game Over stuff
-            Debug.Log("Player " + netIdentity.netId + " has died!");
-        }
     }
 
     void OnNameChanged(string _Old, string _New)

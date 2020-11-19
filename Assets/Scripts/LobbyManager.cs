@@ -1,7 +1,6 @@
 ﻿using Mirror;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyManager : NetworkBehaviour
@@ -13,6 +12,7 @@ public class LobbyManager : NetworkBehaviour
     public GameObject hostUI;
     public Text hostReadyNumberText, hostPlayerReadyText, classNameText;
     public Button hostStartGameButton, clientReadyButton;
+    public SceneAsset map2;
 
     private void Start()
     {
@@ -54,7 +54,7 @@ public class LobbyManager : NetworkBehaviour
                 playersReady++;
             }
 
-            //Check player class and update UI
+            //Check plyaer class and update UI
             if(player.playerClass == 'm')
             {
                 classNameText.text = "Current class:Mage";
@@ -102,8 +102,7 @@ public class LobbyManager : NetworkBehaviour
     public void rpcStartGame()
     {
         NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
-        SceneManager.LoadScene("Map 2");
-        nm2.ServerChangeScene(SceneManager.GetSceneByBuildIndex(2).name);
+        nm2.ServerChangeScene(map2.name);
     }
 
 }

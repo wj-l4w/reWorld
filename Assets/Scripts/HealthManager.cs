@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class HealthManager : NetworkBehaviour
+public class HealthManager : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;
@@ -19,7 +18,6 @@ public class HealthManager : NetworkBehaviour
         
     }
 
-    [TargetRpc]
     public void DmgPlayer(int DmgToGive){
         currentHealth -= DmgToGive;
         if(currentHealth <= 0){
