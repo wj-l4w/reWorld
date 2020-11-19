@@ -143,14 +143,14 @@ public class Player : NetworkBehaviour
     public void CmdRequestWarriorClass()
     {
         NPC npc = FindObjectOfType<NPC>();
-        npc.rpcRequestWarriorClass(this.netIdentity.netId);
+        npc.rpcRequestWarriorClass(this.connectionToClient, this.netIdentity.netId);
     }
 
     [Command]
     public void CmdRequestMageClass()
     {
         NPC npc = FindObjectOfType<NPC>();
-        npc.rpcRequestMageClass(this.netIdentity.netId);
+        npc.rpcRequestMageClass(this.connectionToClient, this.netIdentity.netId);
     }
 
     [Command]
