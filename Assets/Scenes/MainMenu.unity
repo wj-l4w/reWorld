@@ -2460,12 +2460,11 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18, type: 3}
-  - {fileID: 8526274152983922931, guid: da7ec8fccea5b4b4ea1b8d40cca4082a, type: 3}
-  - {fileID: 8375482275392954392, guid: 824419c12a7ff7743b0377d48a716a81, type: 3}
-  GargoyleNPC: {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18,
+  - {fileID: 8795341600673908253, guid: 66a00d9e3a0b2344abd52d8f68db2162, type: 3}
+  - {fileID: 8375482275392954392, guid: 9e91227a6d74d064da3b866abeafee5f, type: 3}
+  GargoyleNPC: {fileID: 8795341600673908253, guid: 66a00d9e3a0b2344abd52d8f68db2162,
     type: 3}
-  SignBoard: {fileID: 8375482275392954392, guid: 824419c12a7ff7743b0377d48a716a81,
+  SignBoard: {fileID: 8375482275392954392, guid: 9e91227a6d74d064da3b866abeafee5f,
     type: 3}
 --- !u!114 &840593947
 MonoBehaviour:

@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8526274152983922931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1822549189809875344}
@@ -337,6 +337,11 @@ MonoBehaviour:
   camSmoothing: 1
   camOffset: {x: 0, y: 0, z: -1}
   moveSpeed: 3
+  maxHp: 100
+  playerClass: 119
+  isReady: 0
+  currentHp: 0
+  canShoot: 0
   playerNameStr: Paimon
 --- !u!114 &8006876335719082375
 MonoBehaviour:
