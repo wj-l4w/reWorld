@@ -10,6 +10,7 @@ public class NetworkManager2 : NetworkManager
     [Header("Game Objects")]
     public GameObject GargoyleNPC;
     public GameObject SignBoard;
+    public EnemySpawner es;
 
 
     public override void OnServerSceneChanged(string sceneName)
@@ -19,6 +20,12 @@ public class NetworkManager2 : NetworkManager
         {
             Debug.Log("Server scene changed to PreGameLobby");
             SpawnStuffs();
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            Debug.Log("Server scene changed to PreGameLobby");
+            es = FindObjectOfType<EnemySpawner>();
+            SpawnMobs();
         }
     }
 
@@ -47,5 +54,14 @@ public class NetworkManager2 : NetworkManager
         //Spawn signboard
         GameObject signboard = Instantiate(SignBoard);
         NetworkServer.Spawn(signboard);
+    }
+
+    public void SpawnMobs()
+    {
+        es.initialSpawn(es.Enemies[0],8);
+        es.initialSpawn(es.Enemies[1], 4);
+        es.initialSpawn(es.Enemies[2], 1);
+        es.initialSpawn(es.Enemies[3], 8);
+        es.initialSpawn(es.Enemies[4], 4);
     }
 }

@@ -2460,13 +2460,18 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18, type: 3}
-  - {fileID: 8526274152983922931, guid: da7ec8fccea5b4b4ea1b8d40cca4082a, type: 3}
-  - {fileID: 8375482275392954392, guid: 824419c12a7ff7743b0377d48a716a81, type: 3}
-  GargoyleNPC: {fileID: 8795341600673908253, guid: da00415dc2136444990649ac03761f18,
+  - {fileID: 8795341600673908253, guid: 66a00d9e3a0b2344abd52d8f68db2162, type: 3}
+  - {fileID: 8375482275392954392, guid: 9e91227a6d74d064da3b866abeafee5f, type: 3}
+  - {fileID: 2829759825664315340, guid: 2aa6912b343a364409d755797613892e, type: 3}
+  - {fileID: 4343291752090017080, guid: eca5337dd2194774d9c9824129cdf848, type: 3}
+  - {fileID: 2648472758497677866, guid: ddcfe3d9ba33bd047a9dd8d532cc4f92, type: 3}
+  - {fileID: 5719513193784087532, guid: 50a67fd452613394397159474b049fe0, type: 3}
+  - {fileID: 7335490705056631622, guid: 6ca35881398bec64389a13de7ca88054, type: 3}
+  GargoyleNPC: {fileID: 8795341600673908253, guid: 66a00d9e3a0b2344abd52d8f68db2162,
     type: 3}
-  SignBoard: {fileID: 8375482275392954392, guid: 824419c12a7ff7743b0377d48a716a81,
+  SignBoard: {fileID: 8375482275392954392, guid: 9e91227a6d74d064da3b866abeafee5f,
     type: 3}
+  es: {fileID: 0}
 --- !u!114 &840593947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3987,7 +3992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457565809}
   m_Layer: 0
-  m_Name: '----- SYSTEMS -----'
+  m_Name: ----- SYSTEMS -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5136,7 +5141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1837683425}
   m_Layer: 0
-  m_Name: '----- UI -----'
+  m_Name: ----- UI -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5166,7 +5171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858018618}
   m_Layer: 0
-  m_Name: '----- SCENE -----'
+  m_Name: ----- SCENE -----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
