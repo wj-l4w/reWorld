@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2829759825664315343}
   - component: {fileID: 2829759825664315342}
   - component: {fileID: 2829759825664315341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homePos: {fileID: 0}
+  currentHealth: 0
+  maxHealth: 11
   speed: 5
   minRange: 0.1
   maxRange: 2
@@ -195,5 +197,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c442cf53e74afce4cb3f7175ac45db42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
