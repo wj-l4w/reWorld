@@ -75,6 +75,7 @@ public class LobbyManager : NetworkBehaviour
             hostReadyNumberText.text = "<color=green>" + playersReady + " / " + numOfPlayers + "</color>";
         }
         else{
+            hostStartGameButton.interactable = false;
             hostReadyNumberText.text = "<color=yellow>" + playersReady + " / " + numOfPlayers + "</color>";
             hostPlayerReadyText.text = "<color=yellow>Players Ready:</color>";
         }
