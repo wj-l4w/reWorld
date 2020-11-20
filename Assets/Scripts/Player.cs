@@ -16,6 +16,7 @@ public class Player : NetworkBehaviour
     public TextMesh playerNameText;
     public GameObject playerNameObj;
     public Camera playerCam;
+    public Warrior warriorScript;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -23,7 +24,6 @@ public class Player : NetworkBehaviour
 
     [Header("Stats")]
     public float moveSpeed = 1f;
-    
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass = 'w';
@@ -73,6 +73,8 @@ public class Player : NetworkBehaviour
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        warriorScript.warriorUpdate();
 
         //Talking to NPC
         if (SceneManager.GetActiveScene().buildIndex == 1)
@@ -211,6 +213,13 @@ public class Player : NetworkBehaviour
     public void CmdTakeDamage(int dmg)
     {
         takeDamage(dmg);
+    }
+
+    [Command]
+    public void CmdDealDamage(uint netid, int damage)
+    {
+        EnemyController enemy = NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>();
+        enemy.rpcTakeDamage(damage);
     }
 
     private void die()
