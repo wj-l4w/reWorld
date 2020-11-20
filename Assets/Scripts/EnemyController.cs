@@ -7,13 +7,17 @@ public class EnemyController : NetworkBehaviour
 {
     private Animator myAnim;
     private Transform target;
-    //public EnemyAttack enemyAttack;
     [SyncVar]
     public Transform homePos;
+    [Header("Stats")]
     private float attackCd = 1f;
     private float attackAnimCd = 0.5f;
     private bool isAttacking;
     private Player targetPlayer;
+    [SyncVar]
+    public int currentHealth;
+    [SyncVar]
+    public int maxHealth;
     [SerializeField] private int damage;
     [SerializeField] private float speed = 0f;
     [SerializeField] private float minRange = 0f;
@@ -23,6 +27,7 @@ public class EnemyController : NetworkBehaviour
     void Start()
     {
         myAnim = GetComponent<Animator>();
+        currentHealth = maxHealth;
         //enemyAttack = GetComponent<EnemyAttack>();
     }
 
@@ -113,6 +118,21 @@ public class EnemyController : NetworkBehaviour
     {
         targetPlayer.takeDamage(DmgToGive);
         Debug.Log(netId + " has hit player " + targetPlayer.netId + " for " + DmgToGive + " damage");
+    }
+
+    [ClientRpc]
+    public void rpcTakeDamage(int dmgToGive)
+    {
+        Debug.Log("Enemy " + netId + " has taken " + dmgToGive + " damage.");
+        currentHealth -= dmgToGive;
+        if (currentHealth <= 0)
+        {
+            //If die
+            //Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
+
+            //drop loot and exp
+        }
     }
 }
 
