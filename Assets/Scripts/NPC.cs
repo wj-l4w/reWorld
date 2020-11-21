@@ -79,6 +79,8 @@ public class NPC : NetworkBehaviour
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         player.playerClass = 'w';
+        player.warriorScript.enabled = true;
+        player.mageScript.enabled = false;
         LobbyManager lm = FindObjectOfType<LobbyManager>();
         lm.classNameText.text = "Current class:Warrior";
     }
@@ -88,6 +90,8 @@ public class NPC : NetworkBehaviour
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         player.playerClass = 'm';
+        player.warriorScript.enabled = false;
+        player.mageScript.enabled = true;
         LobbyManager lm = FindObjectOfType<LobbyManager>();
         lm.classNameText.text = "Current class: Mage";
     }

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228505909687696656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.147, y: -0.344, z: -1}
+  m_LocalPosition: {x: 0.147, y: -0.344, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9052363312279026032}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9052363312279026032}
   m_Layer: 0
-  m_Name: WarriorAtkPos
+  m_Name: WeaponAtkPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 1432194869539852314}
   - component: {fileID: 6761412271920458317}
   - component: {fileID: 8006876335719082375}
+  - component: {fileID: 3193422197788975347}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -448,6 +449,7 @@ MonoBehaviour:
   playerNameObj: {fileID: 8459611139113008347}
   playerCam: {fileID: 0}
   warriorScript: {fileID: 6761412271920458317}
+  mageScript: {fileID: 3193422197788975347}
   camSmoothing: 1
   camOffset: {x: 0, y: 0, z: -1}
   moveSpeed: 3
@@ -464,7 +466,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8526274152983922931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3754096007040c0418b30fc37bd782a9, type: 3}
   m_Name: 
@@ -498,3 +500,27 @@ MonoBehaviour:
   syncInterval: 0.01
   clientAuthority: 1
   animator: {fileID: 8615028852854471531}
+--- !u!114 &3193422197788975347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526274152983922931}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c1d4be78ee2d444b2ba92d3dc6c624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  startTimeBtwAtk: 0.6
+  atkPos: {fileID: 9052363312279026032}
+  WhatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 768
+  animator: {fileID: 8615028852854471531}
+  offset: -90
+  weapon: {fileID: 1228505909687696656}
+  fireSpell: {fileID: 869630677, guid: 0c514ddcaf3efc64e9c5f5f40dbcb25f, type: 3}
+  player: {fileID: 1432194869539852314}

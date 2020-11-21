@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour
     public GameObject playerNameObj;
     public Camera playerCam;
     public Warrior warriorScript;
+    public Mage mageScript;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -26,7 +27,7 @@ public class Player : NetworkBehaviour
     public float moveSpeed = 1f;
     //m = mage, w = warrior
     [SyncVar]
-    public char playerClass = 'w';
+    public char playerClass;
     [SyncVar]
     public bool isReady = false;
     [SyncVar(hook = "OnChangeHealth")]
@@ -74,7 +75,8 @@ public class Player : NetworkBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        warriorScript.warriorUpdate();
+        if (warriorScript.enabled) { warriorScript.warriorUpdate(); }
+        else if (mageScript.enabled) { mageScript.mageUpdate(); }
 
         //Talking to NPC
         if (SceneManager.GetActiveScene().buildIndex == 1)
@@ -128,18 +130,28 @@ public class Player : NetworkBehaviour
         Camera.main.transform.SetParent(transform);
         Camera.main.transform.localPosition = new Vector2(0, 0);
 
-        playerNameObj.transform.localPosition = new Vector2 (-0.05f, 0.25f);
+        playerNameObj.transform.localPosition = new Vector2(-0.05f, 0.25f);
         playerNameObj.transform.localScale = new Vector2(0.1f, 0.1f);
 
         string name = PlayerNameInput.DisplayName;
         CmdSetupPlayer(name);
 
-        //If player is host and client
+        //If player is host and client, auto ready
         if (!isClientOnly)
         {
             isReady = true;
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
+            nm2.checkPlayerClass(netIdentity.netId);
+        }
+
+        activateClassScripts();
     }
+
+
 
     [Command]
     public void CmdSetupPlayer(string _name)
@@ -193,20 +205,24 @@ public class Player : NetworkBehaviour
 
     public void takeDamage(int dmg)
     {
-        if (isServer)
+        if(SceneManager.GetActiveScene().buildIndex == 2)
         {
-            currentHp -= dmg;
-        }
-        else
-        {
-            CmdTakeDamage(dmg);
+            if (isServer)
+            {
+                currentHp -= dmg;
+            }
+            else
+            {
+                CmdTakeDamage(dmg);
+            }
+
+
+            if (currentHp <= 0)
+            {
+                die();
+            }
         }
 
-        
-        if (currentHp <= 0)
-        {
-            die();
-        }
     }
 
     [Command]
@@ -218,8 +234,17 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdDealDamage(uint netid, int damage)
     {
-        EnemyController enemy = NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>();
-        enemy.rpcTakeDamage(damage);
+        if (NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>() != null)
+        {
+            EnemyController enemy = NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>();
+            enemy.rpcTakeDamage(damage);
+        }
+        else if(NetworkIdentity.spawned[netid].gameObject.GetComponent<Player>() != null)
+        {
+            Player enemy = NetworkIdentity.spawned[netid].gameObject.GetComponent<Player>();
+            enemy.takeDamage(damage);
+        }
+        
     }
 
     private void die()
@@ -227,5 +252,17 @@ public class Player : NetworkBehaviour
         Debug.Log("Player " + netId + " has died");
     }
 
+    public void activateClassScripts()
+    {
+        //If player is warrior activate script
+        if (playerClass == 'w')
+        {
+            warriorScript.enabled = true;
+        }
+        else if (playerClass == 'm')
+        {
+            mageScript.enabled = true;
+        }
+    }
 
 }
