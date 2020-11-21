@@ -22,6 +22,7 @@ public class Warrior : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        timeBtwAtk = 0;
     }
 
     public void warriorUpdate()
@@ -43,21 +44,25 @@ public class Warrior : NetworkBehaviour
             //Cooldown is complete, can atk
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Player attacked");
-                animator.SetTrigger("isAttacking");
+                Debug.Log("Player " + player.netId + " (warrior) slashed his sword!");
+                animator.SetTrigger("warriorIsAttacking");
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(atkPos.position, atkRange, WhatIsEnemies);
                 foreach(Collider2D enemy in enemiesToDamage)
                 {
-                    //Check if its self
+                    //Check if its Player
                     if (enemy.GetComponent<Player>() != null)
                     {
-                        if (enemy.GetComponent<Player>().netId == player.netId)
+                        //If not self, deal damage to player
+                        if (enemy.GetComponent<Player>().netId != player.netId)
                         {
-                            return;
+                            player.CmdDealDamage(enemy.GetComponent<Player>().netId, damage);
                         }
                     }
-
-                    player.CmdDealDamage(enemy.GetComponent<EnemyController>().netId, damage);
+                    //If is enemy (mob), deal damage to mob
+                    if (enemy.GetComponent<EnemyController>() != null)
+                    {
+                        player.CmdDealDamage(enemy.GetComponent<EnemyController>().netId, damage);
+                    }
                 }
 
                 timeBtwAtk = startTimeBtwAtk;
@@ -67,33 +72,6 @@ public class Warrior : NetworkBehaviour
         {
             timeBtwAtk -= Time.deltaTime;
         }
-            
-       
-        
-
-
-
-
-/*        if (timeBtwAtk <= 0)
-        {
-            //Cooldown is complete, can atk
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Debug.Log("Player attacked");
-                animator.SetBool("IsAttacking", true);
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(atkPos.position, atkRange, WhatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
-                {
-                    enemiesToDamage[i].GetComponent<EnemyController>().cmdTakeDamage(damage);
-                }
-            }
-            timeBtwAtk = startTimeBtwAtk;
-        }
-        else
-        {
-            animator.SetBool("IsAttacking", false);
-            timeBtwAtk -= Time.deltaTime;
-        }*/
     }
 
     private void OnDrawGizmosSelected()

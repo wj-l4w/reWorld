@@ -33,6 +33,10 @@ public class EnemyController : NetworkBehaviour
 
     void Update()
     {
+        if (FindClosestPlayer() == null)
+        {
+            return;
+        }
         targetPlayer = FindClosestPlayer().GetComponent<Player>();
         target = targetPlayer.transform;
         //enemyAttack.target = targetPlayer.GetComponent<Player>();
@@ -88,6 +92,10 @@ public class EnemyController : NetworkBehaviour
     {
         GameObject[] players;
         players = GameObject.FindGameObjectsWithTag("Player");
+        if (players.Length == 0)
+        {
+            return null;
+        }
         GameObject closest = null;
         float shortestDistance = Mathf.Infinity;
         Vector3 position = transform.position;

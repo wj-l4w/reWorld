@@ -47,10 +47,13 @@ public class EnemySpawner : NetworkBehaviour
             randomY = Random.Range(-1, 1);
             spawnPos.x += randomX;
             spawnPos.y += randomY;
+            Transform pos = EnemiesSpawnPos[j].transform;
+            pos.position.x.Equals(spawnPos.x);
+            pos.position.y.Equals(spawnPos.y);
 
             //Instantiating and spawning, assigning homePos
             GameObject mobClone = Instantiate(enemy, spawnPos, Quaternion.identity);
-            mobClone.GetComponent<EnemyController>().homePos = EnemiesSpawnPos[j].transform;
+            mobClone.GetComponent<EnemyController>().homePos = pos;
             NetworkServer.Spawn(mobClone);
 
             //Removing that location as it is taken already
