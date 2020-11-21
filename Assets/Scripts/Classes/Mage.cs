@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Warrior : NetworkBehaviour
+public class Mage : NetworkBehaviour
 {
     [Header("Stats")]
     public int damage;
@@ -48,15 +48,7 @@ public class Warrior : NetworkBehaviour
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(atkPos.position, atkRange, WhatIsEnemies);
                 foreach(Collider2D enemy in enemiesToDamage)
                 {
-                    //Check if its self
-                    if (enemy.GetComponent<Player>() != null)
-                    {
-                        if (enemy.GetComponent<Player>().netId == player.netId)
-                        {
-                            return;
-                        }
-                    }
-
+                    
                     player.CmdDealDamage(enemy.GetComponent<EnemyController>().netId, damage);
                 }
 
