@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class TalentTree : MonoBehaviour
+public class TalentTree : NetworkBehaviour
 {
-    private int points = 10;
+    private int points = 2;
+    public uint playerId;
 
     [SerializeField]
     private Talent[] talents;
@@ -14,8 +16,6 @@ public class TalentTree : MonoBehaviour
     private Text talentPointText;
 
     
-
-    // Start is called before the first frame update
 
     public int MyPoints
     {
@@ -36,7 +36,6 @@ public class TalentTree : MonoBehaviour
         resetTalents();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -44,7 +43,7 @@ public class TalentTree : MonoBehaviour
 
     public void UseTalent(Talent talent)
     {
-        if (MyPoints > 0 && talent.Click())
+        if (MyPoints > 0 && /*(*/talent.GetComponent<DmgBuff>().Click() /*|| talent.GetComponent<DmgBuff>().Click())*/)
         {
             MyPoints--;
         }
@@ -62,5 +61,10 @@ public class TalentTree : MonoBehaviour
     private void UpdateTalentPointText()
     {
         talentPointText.text = points.ToString();
+    }
+
+    public void closeTalentTree()
+    {
+        gameObject.GetComponent<Canvas>().enabled = false;
     }
 }

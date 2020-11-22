@@ -19,6 +19,11 @@ public class Fireball : NetworkBehaviour
         Invoke(nameof(DestroyProjectile), lifeTime);
     }
 
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

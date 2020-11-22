@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using TMPro;
@@ -18,6 +19,7 @@ public class Player : NetworkBehaviour
     public Camera playerCam;
     public Warrior warriorScript;
     public Mage mageScript;
+    public TalentTree talentTree;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -92,7 +94,17 @@ public class Player : NetworkBehaviour
                 }                
             }
         }
-        
+
+        //Talent tree
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                talentTree.GetComponent<Canvas>().enabled = true;
+                talentTree.playerId = netIdentity.netId;            
+            }
+        }
+
     }
 
     private void Move()
@@ -149,6 +161,8 @@ public class Player : NetworkBehaviour
             nm2.checkPlayerClass(netIdentity.netId);*/
             NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
             nm3.checkPlayerClass(netIdentity.netId);
+            talentTree = FindObjectOfType<TalentTree>();
+            talentTree.GetComponent<Canvas>().enabled = false;
         }
 
         activateClassScripts();
@@ -268,4 +282,33 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public char getActiveScript()
+    {
+        if (warriorScript.isActiveAndEnabled)
+        {
+            return 'w';
+        }
+        else if (mageScript.isActiveAndEnabled)
+        {
+            return 'm';
+        }
+        else
+        {
+            return 'z';
+        }
+    }
+
+    IEnumerator HealingOverTime(int healing)
+    {
+        while (true)
+        {
+            if(currentHp < maxHp)
+            {
+                currentHp += healing;
+            }
+            yield return new WaitForSeconds(3); // Wait 3 secs;
+
+        }
+
+    }
 }

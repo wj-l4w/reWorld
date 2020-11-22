@@ -117,4 +117,13 @@ public class NetworkManager3 : NobleNetworkManager
             player.activateClassScripts();
         }
     }
+
+    public void SetFireballStats(uint playerId, uint fireballId)
+    {
+        Player player = NetworkIdentity.spawned[playerId].gameObject.GetComponent<Player>();
+        Fireball fireball = NetworkIdentity.spawned[fireballId].gameObject.GetComponent<Fireball>();
+
+        fireball.player = player;
+        fireball.damage *= player.mageScript.fireballLevel;
+    }
 }
