@@ -1938,7 +1938,7 @@ MonoBehaviour:
   port: 8888
   updateTime: 15
   disconnectTimeout: 5000
-  ipv6Enabled: 1
+  ipv6Enabled: 0
   maxConnectAttempts: 10
   serverMaxMessagesPerTick: 10000
   clientMaxMessagesPerTick: 1000
