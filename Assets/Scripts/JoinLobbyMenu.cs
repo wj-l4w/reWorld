@@ -7,7 +7,7 @@ using Mirror;
 
 public class JoinLobbyMenu : MonoBehaviour
 {
-    [SerializeField] private NetworkManager networkManager = null;
+    [SerializeField] private NetworkManager3 networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
