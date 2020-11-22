@@ -176,6 +176,7 @@ MonoBehaviour:
   speed: 2
   minRange: 0.5
   maxRange: 2
+  mobId: 2
 --- !u!114 &2648472758497677867
 MonoBehaviour:
   m_ObjectHideFlags: 0

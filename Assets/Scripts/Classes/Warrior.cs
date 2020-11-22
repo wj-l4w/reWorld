@@ -46,6 +46,7 @@ public class Warrior : NetworkBehaviour
             {
                 Debug.Log("Player " + player.netId + " (warrior) slashed his sword!");
                 animator.SetTrigger("warriorIsAttacking");
+                FindObjectOfType<AudioManager>().Play("SwordAttack");
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(atkPos.position, atkRange, WhatIsEnemies);
                 foreach(Collider2D enemy in enemiesToDamage)
                 {

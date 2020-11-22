@@ -48,6 +48,8 @@ public class Mage : NetworkBehaviour
             {
                 Debug.Log("Player " + player.netId + " (mage) casted a fireball!");
                 animator.SetTrigger("mageIsAttacking");
+                
+                FindObjectOfType<AudioManager>().Play("Fireball");
                 Fireball fireball = Instantiate(fireSpell, atkPos.position, rotation);
                 NetworkServer.Spawn(fireball.gameObject, player.connectionToClient);
                 fireballId= fireball.netId;

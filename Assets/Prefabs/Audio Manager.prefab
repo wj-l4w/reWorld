@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6373262476295060416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5423859806499022547}
+  - component: {fileID: 2188201706364768107}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5423859806499022547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373262476295060416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2188201706364768107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373262476295060416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5104316e078cd0d46a569ca03dc11654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Theme2
+    clip: {fileID: 8300000, guid: 2aefa3b8e223b2f42af2c21f8f15a827, type: 3}
+    volume: 0.06
+    pitch: 1
+    source: {fileID: 0}
+  - name: SwordAttack
+    clip: {fileID: 8300000, guid: 26b174ca41073b24a9eecedc4613da3c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Fireball
+    clip: {fileID: 8300000, guid: f31c68fb922a4ad4ea0aab541919bf17, type: 3}
+    volume: 0.25
+    pitch: 1
+    source: {fileID: 0}
+  - name: FireballOnHit
+    clip: {fileID: 8300000, guid: 59bfe538b9fea284aab56ef1a0ccb35b, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: Cat
+    clip: {fileID: 8300000, guid: 433cd20b426a26a40a5943bad26ed980, type: 3}
+    volume: 0.816
+    pitch: 1
+    source: {fileID: 0}
+  - name: Cobra
+    clip: {fileID: 8300000, guid: 6474f01b08de6014388b36fbb16dd7c4, type: 3}
+    volume: 0.728
+    pitch: 1
+    source: {fileID: 0}
+  - name: Gladiator
+    clip: {fileID: 8300000, guid: 9fc709c95b5cfbe4393319730f95baa4, type: 3}
+    volume: 0.519
+    pitch: 1
+    source: {fileID: 0}
+  - name: MiniGolem
+    clip: {fileID: 8300000, guid: 4b461c64662a8514a92c630d2255bbfa, type: 3}
+    volume: 0.756
+    pitch: 1
+    source: {fileID: 0}
+  - name: Slime
+    clip: {fileID: 8300000, guid: 7955f5b9d8d70dc4f91c877532b757ab, type: 3}
+    volume: 0.835
+    pitch: 1
+    source: {fileID: 0}
