@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using TMPro;
@@ -18,13 +19,17 @@ public class Player : NetworkBehaviour
     public Camera playerCam;
     public Warrior warriorScript;
     public Mage mageScript;
+    public TalentTree talentTree;
 
     [Header("Camera")]
     public float camSmoothing;
     public Vector3 camOffset;
 
     [Header("Stats")]
+    [SyncVar]
     public float moveSpeed = 1f;
+    [SyncVar]
+    public int exp = 0;
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass;
@@ -92,7 +97,17 @@ public class Player : NetworkBehaviour
                 }                
             }
         }
-        
+
+        //Talent tree
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                talentTree.GetComponent<Canvas>().enabled = true;
+                talentTree.playerId = netIdentity.netId;            
+            }
+        }
+
     }
 
     private void Move()
@@ -144,8 +159,13 @@ public class Player : NetworkBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
+            /*
             NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
-            nm2.checkPlayerClass(netIdentity.netId);
+            nm2.checkPlayerClass(netIdentity.netId);*/
+            NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
+            nm3.checkPlayerClass(netIdentity.netId);
+            talentTree = FindObjectOfType<TalentTree>();
+            talentTree.GetComponent<Canvas>().enabled = false;
         }
 
         activateClassScripts();
@@ -247,9 +267,45 @@ public class Player : NetworkBehaviour
         
     }
 
+    public void healDamage(int healing)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (isServer)
+            {
+                currentHp += healing;
+            }
+            else
+            {
+                CmdHealDamage(healing);
+            }
+        }
+
+    }
+
+    [Command]
+    public void CmdHealDamage(int healing)
+    {
+        healDamage(healing);
+    }
     private void die()
     {
         Debug.Log("Player " + netId + " has died");
+    }
+
+    public IEnumerator HealingOverTime(int healing)
+    {
+        while (true)
+        {
+            if (currentHp < maxHp)
+            {
+                healDamage(healing);
+                Debug.Log("Healed player for " + healing);
+            }
+            yield return new WaitForSeconds(5); // Wait 3 secs;
+
+        }
+
     }
 
     public void activateClassScripts()
@@ -265,4 +321,44 @@ public class Player : NetworkBehaviour
         }
     }
 
+    public char getActiveScript()
+    {
+        if (warriorScript.isActiveAndEnabled)
+        {
+            return 'w';
+        }
+        else if (mageScript.isActiveAndEnabled)
+        {
+            return 'm';
+        }
+        else
+        {
+            return 'z';
+        }
+    }
+
+    public void changeMoveSpeed(float speed)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (isServer)
+            {
+                moveSpeed += speed;
+            }
+            else
+            {
+                CmdChangeMoveSpeed(speed);
+            }
+        }
+
+    }
+
+    [Command]
+    public void CmdChangeMoveSpeed(float speed)
+    {
+        changeMoveSpeed(speed);
+    }
+
 }
+
+

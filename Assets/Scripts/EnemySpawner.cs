@@ -35,7 +35,8 @@ public class EnemySpawner : NetworkBehaviour
 
     public void initialSpawn(GameObject enemy, int loopCount)
     {
-        NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
+        //NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
+        NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
         for (int i = 1; i <= loopCount; i++)
         {
             //Getting a random spawn postition from list

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class Talent : MonoBehaviour
+public class Talent : NetworkBehaviour
 {
     
     private Image sprite;
@@ -22,7 +23,7 @@ public class Talent : MonoBehaviour
         sprite = GetComponent<Image>();
     }
 
-    public bool Click()
+    public virtual bool Click()
     {
         if (currentCount < maxCount)
         {
