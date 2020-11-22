@@ -54,6 +54,16 @@ public class NetworkManager3 : NobleNetworkManager
         }
     }
 
+    public override void OnServerPrepared(string hostAddress, ushort hostPort)
+    {
+        base.OnServerPrepared(hostAddress, hostPort);
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            LobbyManager lm = FindObjectOfType<LobbyManager>();
+            lm.setHostIpPort(hostAddress, hostPort.ToString());
+        }
+    }
+
     /*    public override void OnServerAddPlayer(NetworkConnection conn)
         {
             Transform startPos = GetStartPosition();

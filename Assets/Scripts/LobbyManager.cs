@@ -11,7 +11,7 @@ public class LobbyManager : NetworkBehaviour
     [Header("UI")]
     public GameObject clientUI;
     public GameObject hostUI;
-    public Text hostReadyNumberText, hostPlayerReadyText, classNameText;
+    public Text hostReadyNumberText, hostPlayerReadyText, classNameText, hostIp, hostPort;
     public Button hostStartGameButton, clientReadyButton;
 
     private void Start()
@@ -113,4 +113,9 @@ public class LobbyManager : NetworkBehaviour
         nm3.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);
     }
 
+    public void setHostIpPort(string ip, string port)
+    {
+        hostIp.text = "IP: " + ip;
+        hostPort.text = "Port: " + port;
+    }
 }
