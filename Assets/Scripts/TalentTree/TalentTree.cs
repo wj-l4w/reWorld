@@ -6,7 +6,7 @@ using Mirror;
 
 public class TalentTree : NetworkBehaviour
 {
-    private int points = 0;
+    private int points = 2;
     public uint playerId;
 
     public Talent[] talents;
