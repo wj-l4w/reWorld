@@ -47,7 +47,7 @@ public class Mage : NetworkBehaviour
                 //Cast fireball
                 Fireball fireball = Instantiate(fireSpell, atkPos.position, weapon.transform.rotation);
                 fireball.player = player;
-                NetworkServer.Spawn(fireball.gameObject);
+                spawnFireball(fireball.gameObject);
 
                 timeBtwAtk = startTimeBtwAtk;
             }
@@ -56,6 +56,24 @@ public class Mage : NetworkBehaviour
         {
             timeBtwAtk -= Time.deltaTime;
         }
-            
+
+    }
+
+    public void spawnFireball(GameObject fireball)
+    {
+        if (isServer)
+        {
+            NetworkServer.Spawn(fireball.gameObject);
+        }
+        else
+        {
+            CmdSpawnFireball(fireball);
+        }
+    }
+
+    [Command]
+    public void CmdSpawnFireball(GameObject fireball)
+    {
+        spawnFireball(fireball);
     }
 }
