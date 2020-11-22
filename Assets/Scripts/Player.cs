@@ -26,7 +26,10 @@ public class Player : NetworkBehaviour
     public Vector3 camOffset;
 
     [Header("Stats")]
+    [SyncVar]
     public float moveSpeed = 1f;
+    [SyncVar]
+    public int exp = 0;
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass;
@@ -264,9 +267,45 @@ public class Player : NetworkBehaviour
         
     }
 
+    public void healDamage(int healing)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (isServer)
+            {
+                currentHp += healing;
+            }
+            else
+            {
+                CmdHealDamage(healing);
+            }
+        }
+
+    }
+
+    [Command]
+    public void CmdHealDamage(int healing)
+    {
+        healDamage(healing);
+    }
     private void die()
     {
         Debug.Log("Player " + netId + " has died");
+    }
+
+    public IEnumerator HealingOverTime(int healing)
+    {
+        while (true)
+        {
+            if (currentHp < maxHp)
+            {
+                healDamage(healing);
+                Debug.Log("Healed player for " + healing);
+            }
+            yield return new WaitForSeconds(5); // Wait 3 secs;
+
+        }
+
     }
 
     public void activateClassScripts()
@@ -298,17 +337,28 @@ public class Player : NetworkBehaviour
         }
     }
 
-    IEnumerator HealingOverTime(int healing)
+    public void changeMoveSpeed(float speed)
     {
-        while (true)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            if(currentHp < maxHp)
+            if (isServer)
             {
-                currentHp += healing;
+                moveSpeed += speed;
             }
-            yield return new WaitForSeconds(3); // Wait 3 secs;
-
+            else
+            {
+                CmdChangeMoveSpeed(speed);
+            }
         }
 
     }
+
+    [Command]
+    public void CmdChangeMoveSpeed(float speed)
+    {
+        changeMoveSpeed(speed);
+    }
+
 }
+
+
