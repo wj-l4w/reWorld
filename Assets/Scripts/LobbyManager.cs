@@ -102,10 +102,15 @@ public class LobbyManager : NetworkBehaviour
     [ClientRpc]
     public void rpcStartGame()
     {
+        /*
         NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
         int buildIndex = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(buildIndex);
-        nm2.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);
+        nm2.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);*/
+        NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
+        int buildIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(buildIndex);
+        nm3.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);
     }
 
 }

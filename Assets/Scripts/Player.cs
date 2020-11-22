@@ -144,8 +144,11 @@ public class Player : NetworkBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
+            /*
             NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
-            nm2.checkPlayerClass(netIdentity.netId);
+            nm2.checkPlayerClass(netIdentity.netId);*/
+            NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
+            nm3.checkPlayerClass(netIdentity.netId);
         }
 
         activateClassScripts();
