@@ -22,6 +22,7 @@ public class EnemyController : NetworkBehaviour
     [SerializeField] private float speed = 0f;
     [SerializeField] private float minRange = 0f;
     [SerializeField] private float maxRange = 0f;
+    [SerializeField] private int mobId;
 
 
     void Start()
@@ -53,6 +54,21 @@ public class EnemyController : NetworkBehaviour
                 myAnim.SetBool("isAttacking", false);
                 myAnim.SetBool("isMoving", false);
                 if(attackCd <= 0){
+                    if(mobId == 0){
+                        FindObjectOfType<AudioManager>().Play("Cat");
+                    }
+                    else if(mobId == 1 ){
+                        FindObjectOfType<AudioManager>().Play("Cobra");
+                    }
+                    else if(mobId == 2 ){
+                        FindObjectOfType<AudioManager>().Play("Gladiator");
+                    }
+                    else if(mobId == 3 ){
+                        FindObjectOfType<AudioManager>().Play("MiniGolem");
+                    }
+                    else if(mobId == 4 ){
+                        FindObjectOfType<AudioManager>().Play("Slime");
+                    }
                     myAnim.SetBool("isAttacking",true);
                     attackAnimCd -= Time.deltaTime;
                     if(attackAnimCd <= 0){

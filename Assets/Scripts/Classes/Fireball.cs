@@ -21,6 +21,7 @@ public class Fireball : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        FindObjectOfType<AudioManager>().Play("FireballOnHit");
         if (collision.CompareTag("Player"))
         {
             if (collision.GetComponent<Player>() != null)

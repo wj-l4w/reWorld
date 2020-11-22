@@ -44,6 +44,7 @@ public class Mage : NetworkBehaviour
             {
                 Debug.Log("Player " + player.netId + " (mage) casted a fireball!");
                 animator.SetTrigger("mageIsAttacking");
+                FindObjectOfType<AudioManager>().Play("Fireball");
                 //Cast fireball
                 Fireball fireball = Instantiate(fireSpell, atkPos.position, weapon.transform.rotation);
                 fireball.player = player;
