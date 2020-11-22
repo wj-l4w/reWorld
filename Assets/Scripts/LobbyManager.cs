@@ -11,7 +11,7 @@ public class LobbyManager : NetworkBehaviour
     [Header("UI")]
     public GameObject clientUI;
     public GameObject hostUI;
-    public Text hostReadyNumberText, hostPlayerReadyText, classNameText;
+    public Text hostReadyNumberText, hostPlayerReadyText, classNameText, hostIp, hostPort;
     public Button hostStartGameButton, clientReadyButton;
 
     private void Start()
@@ -102,10 +102,20 @@ public class LobbyManager : NetworkBehaviour
     [ClientRpc]
     public void rpcStartGame()
     {
+        /*
         NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
         int buildIndex = SceneManager.GetActiveScene().buildIndex + 1;
         SceneManager.LoadScene(buildIndex);
-        nm2.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);
+        nm2.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);*/
+        NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
+        int buildIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(buildIndex);
+        nm3.ServerChangeScene(SceneManager.GetSceneByBuildIndex(buildIndex).name);
     }
 
+    public void setHostIpPort(string ip, string port)
+    {
+        hostIp.text = "IP: " + ip;
+        hostPort.text = "Port: " + port;
+    }
 }

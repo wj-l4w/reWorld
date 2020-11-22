@@ -7,6 +7,7 @@ public class Mage : NetworkBehaviour
 {
     [Header("Stats")]
     private float timeBtwAtk = 0;
+    public int fireballLevel;
     public float startTimeBtwAtk;
     public Transform atkPos;
     
@@ -17,17 +18,20 @@ public class Mage : NetworkBehaviour
     public GameObject weapon;
     public Fireball fireSpell;
     public Player player;
+    private Quaternion rotation;
+    private uint fireballId;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        fireballLevel = 1;
     }
 
     public void mageUpdate()
     {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        weapon.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+        rotation = weapon.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
         if (rotZ > -90 && rotZ <= 90)
         {
             animator.SetFloat("MouseHorizontal", 1f);
@@ -44,11 +48,10 @@ public class Mage : NetworkBehaviour
             {
                 Debug.Log("Player " + player.netId + " (mage) casted a fireball!");
                 animator.SetTrigger("mageIsAttacking");
-                //Cast fireball
-                Fireball fireball = Instantiate(fireSpell, atkPos.position, weapon.transform.rotation);
-                fireball.player = player;
-                NetworkServer.Spawn(fireball.gameObject);
-
+                Fireball fireball = Instantiate(fireSpell, atkPos.position, rotation);
+                NetworkServer.Spawn(fireball.gameObject, player.connectionToClient);
+                fireballId= fireball.netId;
+                CmdSetFireballStats(player.netId, fireballId);
                 timeBtwAtk = startTimeBtwAtk;
             }
         }
@@ -56,6 +59,14 @@ public class Mage : NetworkBehaviour
         {
             timeBtwAtk -= Time.deltaTime;
         }
-            
+
     }
+
+    [Command]
+    public void CmdSetFireballStats(uint playerId, uint fireballId)
+    {
+        NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
+        nm3.SetFireballStats(playerId, fireballId);
+    }
+
 }

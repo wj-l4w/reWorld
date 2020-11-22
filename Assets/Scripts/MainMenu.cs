@@ -8,7 +8,8 @@ using UnityEditor;
 public class MainMenu : MonoBehaviour
 {
     [Header("Network")]
-    [SerializeField] private NetworkManager2 networkManager = null;
+    //[SerializeField] private NetworkManager2 networkManager = null;
+    [SerializeField] private NetworkManager3 networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;

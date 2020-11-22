@@ -7,13 +7,14 @@ using Mirror;
 
 public class JoinLobbyMenu : MonoBehaviour
 {
-    [SerializeField] private NetworkManager networkManager = null;
+    [SerializeField] private NetworkManager3 networkManager = null;
 
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
     [SerializeField] private GameObject loadingPanel = null;
     [SerializeField] private GameObject connectFailPanel = null;
     [SerializeField] private TMP_InputField ipAddressInputField = null;
+    [SerializeField] private TMP_InputField portInputField = null;
     [SerializeField] private Button joinButton = null;
 
     private void OnEnable()
@@ -31,18 +32,35 @@ public class JoinLobbyMenu : MonoBehaviour
     public void JoinLobby()
     {
         string ipAddress = ipAddressInputField.text;
+        int port;
+        if (!string.IsNullOrEmpty(portInputField.text))
+        {
+             port = int.Parse(portInputField.text);
+        }
+        else
+        {
+            port = 8888;
+        }
+        
 
         networkManager.networkAddress = ipAddress;
+        networkManager.networkPort = port;
         networkManager.StartClient();
 
         loadingPanel.SetActive(true);
         joinButton.interactable = false;
     }
 
-    public void checkIPAddress(string ip)
+    public void CheckIPAddress(string ip)
     {
         //If IP is not null, then allow them to continue
         joinButton.interactable = !string.IsNullOrEmpty(ip);
+    }
+
+    public void CheckPort(string port)
+    {
+        //If IP is not null, then allow them to continue
+        joinButton.interactable = !string.IsNullOrEmpty(port);
     }
 
     private void HandleClientConnected()
