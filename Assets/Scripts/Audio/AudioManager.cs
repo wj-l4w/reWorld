@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,18 +17,29 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
         }
     }
 
     void Start()
     {
-        Play("Theme2");
+        if(SceneManager.GetActiveScene().buildIndex == 1){
+            Play("PreGameLobby");
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 2){
+            Play("Map2");
+        }
+        
     }
 
     // Update is called once per frame
     public void Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
+        if(s == null){
+            Debug.LogWarning("Sound: " + name + "not found!");
+            return;
+        }
         if(!s.source.isPlaying){
             s.source.Play();
         } 

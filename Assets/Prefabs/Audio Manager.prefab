@@ -44,48 +44,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Theme2
+  - name: Map2
     clip: {fileID: 8300000, guid: 2aefa3b8e223b2f42af2c21f8f15a827, type: 3}
     volume: 0.06
     pitch: 1
     source: {fileID: 0}
+    loop: 1
   - name: SwordAttack
     clip: {fileID: 8300000, guid: 26b174ca41073b24a9eecedc4613da3c, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: Fireball
     clip: {fileID: 8300000, guid: f31c68fb922a4ad4ea0aab541919bf17, type: 3}
-    volume: 0.25
+    volume: 0.133
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: FireballOnHit
     clip: {fileID: 8300000, guid: 59bfe538b9fea284aab56ef1a0ccb35b, type: 3}
-    volume: 1
+    volume: 0.499
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: Cat
     clip: {fileID: 8300000, guid: 433cd20b426a26a40a5943bad26ed980, type: 3}
-    volume: 0.816
+    volume: 0.4
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: Cobra
     clip: {fileID: 8300000, guid: 6474f01b08de6014388b36fbb16dd7c4, type: 3}
-    volume: 0.728
+    volume: 0.4
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: Gladiator
     clip: {fileID: 8300000, guid: 9fc709c95b5cfbe4393319730f95baa4, type: 3}
-    volume: 0.519
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: MiniGolem
     clip: {fileID: 8300000, guid: 4b461c64662a8514a92c630d2255bbfa, type: 3}
-    volume: 0.756
+    volume: 0.6
     pitch: 1
     source: {fileID: 0}
+    loop: 0
   - name: Slime
     clip: {fileID: 8300000, guid: 7955f5b9d8d70dc4f91c877532b757ab, type: 3}
-    volume: 0.835
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
+    loop: 0
+  - name: PreGameLobby
+    clip: {fileID: 8300000, guid: 3ae559ba2a7881046ad18a8f47acf641, type: 3}
+    volume: 0.273
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
