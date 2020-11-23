@@ -67,7 +67,7 @@ public class LobbyManager : NetworkBehaviour
 
         //Update UI
         //Checking start condition
-        if (playersReady == numOfPlayers && numOfPlayers > 1) //
+        if (playersReady == numOfPlayers) // && numOfPlayers > 1
         {
             hostStartGameButton.interactable = true;
             hostStartGameButton.GetComponentInChildren<Text>().text = "<color=green>Start</color>";
