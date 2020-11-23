@@ -6,7 +6,7 @@ using Mirror;
 
 public class TalentTree : NetworkBehaviour
 {
-    private int points = 2;
+    public int points = 0;
     public uint playerId;
 
     public Talent[] talents;
@@ -72,13 +72,9 @@ public class TalentTree : NetworkBehaviour
     private void resetTalents()
     {
         UpdateTalentPointText();
-        /* foreach (Talent talent in talents)
-        {
-            talent.Lock();
-        } */
     }
 
-    private void UpdateTalentPointText()
+    public void UpdateTalentPointText()
     {
         talentPointText.text = points.ToString();
     }
@@ -86,5 +82,11 @@ public class TalentTree : NetworkBehaviour
     public void closeTalentTree()
     {
         gameObject.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void levelUp()
+    {
+        points++;
+        UpdateTalentPointText();
     }
 }

@@ -9,6 +9,7 @@ using System;
 public class HealthRegen : Talent
 {
     [SerializeField] private TalentTree talentTree;
+    [SerializeField] private int totalHealAmount;
     [SerializeField] private int healAmount;
     public Player player;
     
@@ -18,9 +19,9 @@ public class HealthRegen : Talent
     {
         if (base.Click())
         {
-            healAmount += 2;
+            totalHealAmount += healAmount;
             player = NetworkIdentity.spawned[talentTree.playerId].gameObject.GetComponent<Player>();
-            StartCoroutine(player.HealingOverTime(healAmount));
+            StartCoroutine(player.HealingOverTime(totalHealAmount));
             Debug.Log("Started healing coroutine");
 
             return true;

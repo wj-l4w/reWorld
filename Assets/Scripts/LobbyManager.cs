@@ -67,7 +67,7 @@ public class LobbyManager : NetworkBehaviour
 
         //Update UI
         //Checking start condition
-        if (playersReady == numOfPlayers)
+        if (playersReady == numOfPlayers && numOfPlayers > 1) //
         {
             hostStartGameButton.interactable = true;
             hostStartGameButton.GetComponentInChildren<Text>().text = "<color=green>Start</color>";
@@ -83,8 +83,8 @@ public class LobbyManager : NetworkBehaviour
 
     }
 
-    [ClientRpc]
-    public void rpcReady(uint id)
+    [TargetRpc]
+    public void rpcReady(NetworkConnection conn, uint id)
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         if (player.isReady == true)

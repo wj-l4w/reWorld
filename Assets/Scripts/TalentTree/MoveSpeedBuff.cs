@@ -10,6 +10,7 @@ public class MoveSpeedBuff : Talent
 {
     [SerializeField] private TalentTree talentTree;
     [SerializeField] private float moveSpeedAmount = 0f;
+    [SerializeField] private float moveSpeedBuff = 0.2f;
     public Player player;
     
 
@@ -18,7 +19,7 @@ public class MoveSpeedBuff : Talent
     {
         if (base.Click())
         {
-            moveSpeedAmount += 0.3f;
+            moveSpeedAmount += moveSpeedBuff;
             player = NetworkIdentity.spawned[talentTree.playerId].gameObject.GetComponent<Player>();
             player.changeMoveSpeed(moveSpeedAmount);
             Debug.Log("Increased movement speed by " + moveSpeedAmount);

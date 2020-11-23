@@ -93,11 +93,12 @@ public class NetworkManager3 : NobleNetworkManager
 
     public void SpawnMobs()
     {
-        es.initialSpawn(es.Enemies[0], 8);
-        es.initialSpawn(es.Enemies[1], 4);
-        es.initialSpawn(es.Enemies[2], 1);
-        es.initialSpawn(es.Enemies[3], 8);
-        es.initialSpawn(es.Enemies[4], 4);
+        //0 - Golems, 1 - Cobra, 2 - Cat, 3- Slime, 4 - Gladiator
+        es.initialSpawn(es.Enemies[0], 11);
+        es.initialSpawn(es.Enemies[1], 12);
+        es.initialSpawn(es.Enemies[2], 5);
+        es.initialSpawn(es.Enemies[3], 15);
+        es.initialSpawn(es.Enemies[4], 12);
     }
 
     public void checkPlayerClass(uint id)

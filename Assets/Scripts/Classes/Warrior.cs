@@ -44,7 +44,7 @@ public class Warrior : NetworkBehaviour
             //Cooldown is complete, can atk
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Player " + player.netId + " (warrior) slashed his sword!");
+                //Debug.Log("Player " + player.netId + " (warrior) slashed his sword!");
                 animator.SetTrigger("warriorIsAttacking");
                 FindObjectOfType<AudioManager>().Play("SwordAttack");
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(atkPos.position, atkRange, WhatIsEnemies);
