@@ -83,8 +83,8 @@ public class LobbyManager : NetworkBehaviour
 
     }
 
-    [TargetRpc]
-    public void rpcReady(NetworkConnection conn, uint id)
+    [ClientRpc]
+    public void rpcReady(uint id)
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         if (player.isReady == true)

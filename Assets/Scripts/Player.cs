@@ -234,7 +234,7 @@ public class Player : NetworkBehaviour
     public void CmdReadyUp()
     {
         lobbyManager = FindObjectOfType<LobbyManager>();
-        lobbyManager.rpcReady(connectionToClient ,netId);
+        lobbyManager.rpcReady(netId);
     }
 
     [Command]
