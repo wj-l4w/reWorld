@@ -15,7 +15,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject landingPagePanel = null;
 
     public GameObject settingsPanel;
-    
+
+    private void Start()
+    {
+        networkManager = FindObjectOfType<NetworkManager3>();
+    }
 
     public void HostLobby()
     {

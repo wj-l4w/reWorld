@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2829759825664315329}
   - component: {fileID: 2829759825664315328}
   - component: {fileID: 2829759825664315343}
-  - component: {fileID: 2829759825664315341}
   - component: {fileID: 7142894125551771503}
   - component: {fileID: 6452113590131668734}
   m_Layer: 8
@@ -171,25 +170,17 @@ MonoBehaviour:
   syncInterval: 0.1
   homePos: {fileID: 0}
   currentHealth: 0
-  maxHealth: 11
-  damage: 10
+  maxHealth: 15
+  damage: 20
   speed: 5
-  minRange: 0.5
-  maxRange: 2
---- !u!114 &2829759825664315341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2829759825664315340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c442cf53e74afce4cb3f7175ac45db42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  minRange: 0.9
+  maxRange: 4
+  mobId: 0
+  exp: 30
+  expRange: 6
+  playersMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &7142894125551771503
 MonoBehaviour:
   m_ObjectHideFlags: 0

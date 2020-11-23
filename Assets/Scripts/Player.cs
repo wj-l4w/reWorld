@@ -20,6 +20,10 @@ public class Player : NetworkBehaviour
     public Warrior warriorScript;
     public Mage mageScript;
     public TalentTree talentTree;
+    public HUD hud;
+    public DeathUI deathScreen;
+    public WinUI winScreen;
+    public LobbyManager lobbyManager;
 
     [Header("Camera")]
     public float camSmoothing;
@@ -29,7 +33,9 @@ public class Player : NetworkBehaviour
     [SyncVar]
     public float moveSpeed = 1f;
     [SyncVar]
-    public int exp = 0;
+    public int experience = 0;
+    [SyncVar]
+    public int level = 1;
     //m = mage, w = warrior
     [SyncVar]
     public char playerClass;
@@ -40,6 +46,8 @@ public class Player : NetworkBehaviour
     public int maxHp = 100;
     [SyncVar]
     public bool canShoot = false;
+    [SyncVar]
+    public bool isDead = false;
 
     private Vector2 movement;
 
@@ -50,8 +58,6 @@ public class Player : NetworkBehaviour
     void Start()
     {
         playerCam = Camera.main;
-        maxHp = 100;
-        currentHp = maxHp;
     }
 
     [Client]
@@ -70,6 +76,11 @@ public class Player : NetworkBehaviour
         //This function will move EVERY player, which we dont want!
         //Only move player objects that the player has authority over (their own characters)
         if (!isLocalPlayer){
+            return;
+        }
+
+        if (isDead)
+        {
             return;
         }
 
@@ -151,6 +162,12 @@ public class Player : NetworkBehaviour
         string name = PlayerNameInput.DisplayName;
         CmdSetupPlayer(name);
 
+        //Setting stats
+        maxHp = 100;
+        currentHp = maxHp;
+        experience = 0;
+        level = 1;
+
         //If player is host and client, auto ready
         if (!isClientOnly)
         {
@@ -162,10 +179,29 @@ public class Player : NetworkBehaviour
             /*
             NetworkManager2 nm2 = FindObjectOfType<NetworkManager2>();
             nm2.checkPlayerClass(netIdentity.netId);*/
+            //Finding components
             NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
             nm3.checkPlayerClass(netIdentity.netId);
             talentTree = FindObjectOfType<TalentTree>();
+            hud = FindObjectOfType<HUD>();
+            deathScreen = FindObjectOfType<DeathUI>();
+            winScreen = FindObjectOfType<WinUI>();
+
             talentTree.GetComponent<Canvas>().enabled = false;
+            hud.SetMaxHealth(currentHp, maxHp, netId);
+            hud.SetMaxExp(experience, 100, level, netId);
+            
+
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            //Finding components
+            hud = FindObjectOfType<HUD>();
+            
+
+            hud.SetMaxHealth(currentHp, maxHp, netId);
+            hud.SetMaxExp(experience, 100, level, netId);
+
         }
 
         activateClassScripts();
@@ -197,14 +233,14 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdReadyUp()
     {
-        LobbyManager lobbyManager = FindObjectOfType<LobbyManager>();
-        lobbyManager.rpcReady(this.netIdentity.netId);
+        lobbyManager = FindObjectOfType<LobbyManager>();
+        lobbyManager.rpcReady(connectionToClient ,netId);
     }
 
     [Command]
     public void CmdStartGame()
     {
-        LobbyManager lobbyManager = FindObjectOfType<LobbyManager>();
+        lobbyManager = FindObjectOfType<LobbyManager>();
         lobbyManager.rpcStartGame();
     }
 
@@ -230,6 +266,7 @@ public class Player : NetworkBehaviour
             if (isServer)
             {
                 currentHp -= dmg;
+                hud.SetHealth(currentHp, maxHp, netId);
             }
             else
             {
@@ -257,7 +294,7 @@ public class Player : NetworkBehaviour
         if (NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>() != null)
         {
             EnemyController enemy = NetworkIdentity.spawned[netid].gameObject.GetComponent<EnemyController>();
-            enemy.rpcTakeDamage(damage);
+            enemy.RpcTakeDamage(damage);
         }
         else if(NetworkIdentity.spawned[netid].gameObject.GetComponent<Player>() != null)
         {
@@ -274,6 +311,12 @@ public class Player : NetworkBehaviour
             if (isServer)
             {
                 currentHp += healing;
+                if(currentHp >= maxHp)
+                {
+                    currentHp = maxHp;
+                }
+
+                hud.SetHealth(currentHp, maxHp, netId);
             }
             else
             {
@@ -288,9 +331,15 @@ public class Player : NetworkBehaviour
     {
         healDamage(healing);
     }
+
     private void die()
     {
         Debug.Log("Player " + netId + " has died");
+        animator.SetTrigger("isDead");
+        isDead = true;
+        deathScreen = FindObjectOfType<DeathUI>();
+        deathScreen.GetComponent<Canvas>().enabled = true;
+        StartCoroutine(deathScreen.FadeIn(netId));
     }
 
     public IEnumerator HealingOverTime(int healing)
@@ -357,6 +406,69 @@ public class Player : NetworkBehaviour
     public void CmdChangeMoveSpeed(float speed)
     {
         changeMoveSpeed(speed);
+    }
+
+    public void addExp(int exp)
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (isServer)
+            {
+                //Debug.Log("Player " + netId + " has received " + exp + " exp");
+                experience += exp;
+                if(experience >= 100)
+                {
+                    level++;
+                    experience -= 100;
+                    talentTree.levelUp();
+                }
+
+                hud.SetExp(experience, 100, level, netId);
+            }
+            else
+            {
+                CmdAddExp(exp);
+            }
+        }
+
+    }
+
+    [Command]
+    public void CmdAddExp(int exp)
+    {
+        addExp(exp);
+    }
+
+    public void DeathReturnToMenu()
+    {
+        deathScreen.ReturnToMenu(netId);
+    }
+    public void WinReturnToMenu()
+    {
+        winScreen = FindObjectOfType<WinUI>();
+        winScreen.ReturnToMenu(netId);
+    }
+
+    [Command]
+    public void CmdSetHealth(int health, int maxHealth, uint netid)
+    {
+        hud.SetHealth(health, maxHealth, netid);
+    }
+    [Command]
+    public void CmdSetMaxHealth(int health, int maxHealth, uint netid)
+    {
+        hud.SetMaxHealth(health, maxHealth, netid);
+    }
+
+    [Command]
+    public void CmdSetExp(int exp, int maxExp, int level, uint netid)
+    {
+        hud.SetExp(exp, maxExp, level, netid);
+    }
+    [Command]
+    public void CmdSetMaxExp(int exp, int maxExp, int level, uint netid)
+    {
+        hud.SetExp(exp, maxExp, level, netid);
     }
 
 }

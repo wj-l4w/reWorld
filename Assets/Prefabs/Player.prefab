@@ -450,14 +450,20 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   warriorScript: {fileID: 6761412271920458317}
   mageScript: {fileID: 3193422197788975347}
+  talentTree: {fileID: 0}
+  hud: {fileID: 0}
+  deathScreen: {fileID: 0}
   camSmoothing: 1
   camOffset: {x: 0, y: 0, z: -1}
   moveSpeed: 3
+  experience: 0
+  level: 1
   playerClass: 119
   isReady: 0
   currentHp: 0
   maxHp: 100
   canShoot: 0
+  isDead: 0
   playerNameStr: Paimon
 --- !u!114 &6761412271920458317
 MonoBehaviour:
@@ -514,6 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  fireballLevel: 0
   startTimeBtwAtk: 0.6
   atkPos: {fileID: 9052363312279026032}
   WhatIsEnemies:
