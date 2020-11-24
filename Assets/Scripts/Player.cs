@@ -183,24 +183,23 @@ public class Player : NetworkBehaviour
             NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
             nm3.checkPlayerClass(netIdentity.netId);
             talentTree = FindObjectOfType<TalentTree>();
-            hud = FindObjectOfType<HUD>();
+            hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
             deathScreen = FindObjectOfType<DeathUI>();
             winScreen = FindObjectOfType<WinUI>();
 
             talentTree.GetComponent<Canvas>().enabled = false;
-            hud.SetMaxHealth(currentHp, maxHp, netId);
-            hud.SetMaxExp(experience, 100, level, netId);
+            CmdSetMaxHealth(currentHp, maxHp, netId);
+            CmdSetMaxExp(experience, 100, level, netId);
             
 
         }
         else if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             //Finding components
-            hud = FindObjectOfType<HUD>();
-            
+            hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
 
-            hud.SetMaxHealth(currentHp, maxHp, netId);
-            hud.SetMaxExp(experience, 100, level, netId);
+            CmdSetMaxHealth(currentHp, maxHp, netId);
+            CmdSetMaxExp(experience, 100, level, netId);
 
         }
 
@@ -264,7 +263,7 @@ public class Player : NetworkBehaviour
         if(SceneManager.GetActiveScene().buildIndex == 2)
         {
             currentHp -= dmg;
-            hud.SetHealth(currentHp, maxHp, netId);
+            CmdSetHealth(currentHp, maxHp, netId);
 
             if (currentHp <= 0)
             {
@@ -294,20 +293,13 @@ public class Player : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            if (isServer)
+            currentHp += healing;
+            if(currentHp >= maxHp)
             {
-                currentHp += healing;
-                if(currentHp >= maxHp)
-                {
-                    currentHp = maxHp;
-                }
+                currentHp = maxHp;
+            }
 
-                hud.SetHealth(currentHp, maxHp, netId);
-            }
-            else
-            {
-                CmdHealDamage(healing);
-            }
+            CmdSetHealth(currentHp, maxHp, netId);
         }
 
     }
@@ -398,31 +390,23 @@ public class Player : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            if (isServer)
-            {
-                //Debug.Log("Player " + netId + " has received " + exp + " exp");
-                experience += exp;
-                if(experience >= 100)
-                {
-                    level++;
-                    experience -= 100;
-                    talentTree.levelUp();
-                }
-
-                hud.SetExp(experience, 100, level, netId);
-            }
-            else
-            {
-                CmdAddExp(exp);
-            }
+            CmdAddExp(exp);
         }
-
     }
 
     [Command]
     public void CmdAddExp(int exp)
     {
-        addExp(exp);
+        //Debug.Log("Player " + netId + " has received " + exp + " exp");
+        experience += exp;
+        if (experience >= 100)
+        {
+            level++;
+            experience -= 100;
+            talentTree.levelUp(netId);
+        }
+
+        CmdSetExp(experience, 100, level, netId);
     }
 
     public void DeathReturnToMenu()
@@ -438,23 +422,30 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdSetHealth(int health, int maxHealth, uint netid)
     {
-        hud.SetHealth(health, maxHealth, netid);
+        hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
+        hud.RpcSetHealth(this.connectionToClient, health, maxHealth);
     }
+
     [Command]
     public void CmdSetMaxHealth(int health, int maxHealth, uint netid)
     {
-        hud.SetMaxHealth(health, maxHealth, netid);
+        Debug.Log("Player " + netid + " called CmdSetMaxHealth");
+        hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
+        hud.RpcSetMaxHealth(this.connectionToClient ,health, maxHealth);
     }
 
     [Command]
     public void CmdSetExp(int exp, int maxExp, int level, uint netid)
     {
-        hud.SetExp(exp, maxExp, level, netid);
+        hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
+        hud.RpcSetExp(this.connectionToClient, exp, level, maxExp);
     }
     [Command]
     public void CmdSetMaxExp(int exp, int maxExp, int level, uint netid)
     {
-        hud.SetExp(exp, maxExp, level, netid);
+        Debug.Log("Player " + netid + " called CmdSetMaxExp");
+        hud = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUD>();
+        hud.RpcSetMaxExp(this.connectionToClient, exp, level, maxExp);
     }
 
 }
