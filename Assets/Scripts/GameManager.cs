@@ -11,13 +11,19 @@ public class GameManager : NetworkBehaviour
 
     void Start()
     {
-        playerArr = GameObject.FindGameObjectsWithTag("Player");
+        FindPlayers();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         GetAlivePlayers();
-        checkWin();
+        Invoke(nameof(checkWin), 5);
+        
+    }
+
+    private void FindPlayers()
+    {
+        playerArr = GameObject.FindGameObjectsWithTag("Player");
     }
 
     public void GetAlivePlayers()
@@ -38,7 +44,7 @@ public class GameManager : NetworkBehaviour
     {
         if (alivePlayerArr.Count == 1)
         {
-            StartCoroutine(winUI.FadeIn(alivePlayerArr[0].GetComponent<Player>().netId));
+            winUI.GetComponent<Canvas>().enabled = true;
         }
     }
 }

@@ -220,21 +220,21 @@ public class Player : NetworkBehaviour
     public void CmdRequestWarriorClass()
     {
         NPC npc = FindObjectOfType<NPC>();
-        npc.rpcRequestWarriorClass(this.connectionToClient, this.netIdentity.netId);
+        npc.RpcRequestWarriorClass(this.netIdentity.netId);
     }
 
     [Command]
     public void CmdRequestMageClass()
     {
         NPC npc = FindObjectOfType<NPC>();
-        npc.rpcRequestMageClass(this.connectionToClient, this.netIdentity.netId);
+        npc.RpcRequestMageClass(this.netIdentity.netId);
     }
 
     [Command]
     public void CmdReadyUp()
     {
         lobbyManager = FindObjectOfType<LobbyManager>();
-        lobbyManager.rpcReady(connectionToClient ,netId);
+        lobbyManager.rpcReady(netId);
     }
 
     [Command]
@@ -339,7 +339,6 @@ public class Player : NetworkBehaviour
         isDead = true;
         deathScreen = FindObjectOfType<DeathUI>();
         deathScreen.GetComponent<Canvas>().enabled = true;
-        StartCoroutine(deathScreen.FadeIn(netId));
     }
 
     public IEnumerator HealingOverTime(int healing)

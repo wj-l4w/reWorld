@@ -74,8 +74,8 @@ public class NPC : NetworkBehaviour
 
     }
 
-    [TargetRpc]
-    public void rpcRequestWarriorClass(NetworkConnection conn, uint id)
+    [ClientRpc]
+    public void RpcRequestWarriorClass(uint id)
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         player.playerClass = 'w';
@@ -85,8 +85,8 @@ public class NPC : NetworkBehaviour
         lm.classNameText.text = "Current class:Warrior";
     }
 
-    [TargetRpc]
-    public void rpcRequestMageClass(NetworkConnection conn, uint id)
+    [ClientRpc]
+    public void RpcRequestMageClass(uint id)
     {
         Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
         player.playerClass = 'm';

@@ -19,14 +19,6 @@ public class WinUI : NetworkBehaviour
         BackToMenu.onClick.AddListener(() => { player.WinReturnToMenu(); });
     }
 
-    public IEnumerator FadeIn(uint netId)
-    {
-        Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
-        RpcFadeIn(player.connectionToClient);
-
-        yield return null;
-    }
-
     public void ReturnToMenu(uint netId)
     {
         if(isServer){
@@ -53,17 +45,5 @@ public class WinUI : NetworkBehaviour
         Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
         player.connectionToClient.Disconnect();
         Application.Quit();
-    }
-
-    [TargetRpc]
-    public void RpcFadeIn(NetworkConnection conn)
-    {
-        targetAlpha = 1.0f;
-        winUi.alpha = alpha;
-        while (Mathf.Abs(alpha - targetAlpha) > 0.0001f)
-        {
-            alpha = Mathf.Lerp(alpha, targetAlpha, FadeRate * Time.deltaTime);
-            winUi.alpha = alpha;
-        }
     }
 }
