@@ -262,7 +262,7 @@ public class Player : NetworkBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 2)
         {
-            currentHp -= dmg;
+            CmdDmgHealth(dmg);
             CmdSetHealth(currentHp, maxHp, netId);
 
             if (currentHp <= 0)
@@ -271,6 +271,12 @@ public class Player : NetworkBehaviour
             }
         }
 
+    }
+
+    [Command]
+    public void CmdDmgHealth(int dmg)
+    {
+        currentHp -= dmg;
     }
 
     [Command]
@@ -340,12 +346,40 @@ public class Player : NetworkBehaviour
         //If player is warrior activate script
         if (playerClass == 'w')
         {
-            warriorScript.enabled = true;
+            CmdActivateWarriorScripts();
         }
         else if (playerClass == 'm')
         {
-            mageScript.enabled = true;
+            CmdActivateMageScripts();
         }
+    }
+
+    [Command]
+    public void CmdActivateWarriorScripts()
+    {
+        RpcActivateWarriorScripts(netId);
+    }
+
+    [ClientRpc]
+    public void RpcActivateWarriorScripts(uint id)
+    {
+        Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
+        player.warriorScript.enabled = true;
+        player.mageScript.enabled = false;
+    }
+
+    [Command]
+    public void CmdActivateMageScripts()
+    {
+        RpcActivateWarriorScripts(netId);
+    }
+
+    [ClientRpc]
+    public void RpcActivateMageScripts(uint id)
+    {
+        Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
+        player.warriorScript.enabled = false;
+        player.mageScript.enabled = true;
     }
 
     public char getActiveScript()
