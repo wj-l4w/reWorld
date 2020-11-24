@@ -184,11 +184,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0.02
   damage: 5
-  speed: 8
-  lifeTime: 1.5
-  player: {fileID: 0}
+  speed: 0
+  lifeTime: 0
+  playerId: 0
 --- !u!114 &-2396508126982069802
 MonoBehaviour:
   m_ObjectHideFlags: 0

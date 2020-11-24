@@ -6,22 +6,21 @@ using Mirror;
 public class Fireball : NetworkBehaviour
 {
     [Header("Stats")]
+    [SyncVar]
     public int damage;
+    [SyncVar]
     public float speed;
+    [SyncVar]
     public float lifeTime;
 
     [Header("Other Stuffs")]
-    public Player player;
+    [SyncVar]
+    public uint playerId;
 
 
     private void Start()
     {
         Invoke(nameof(DestroyProjectile), lifeTime);
-    }
-
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -34,10 +33,10 @@ public class Fireball : NetworkBehaviour
                 Player enemy = collision.GetComponent<Player>();
                 //If not self, deal damage to player
                 Debug.Log("Enemy netId is " + enemy.netId);
-                Debug.Log("Player netId is " + player.netIdentity.netId);
-                if (enemy.netId != player.netIdentity.netId)
+                Debug.Log("Player netId is " + playerId);
+                if (enemy.netId != playerId)
                 {
-                    player.CmdDealDamage(enemy.netId, damage);
+                    enemy.CmdDealDamage(enemy.netId, damage);
                     NetworkServer.Destroy(gameObject);
                 }
             }
@@ -50,6 +49,7 @@ public class Fireball : NetworkBehaviour
             if (collision.GetComponent<EnemyController>() != null)
             {
                 EnemyController enemy = collision.GetComponent<EnemyController>();
+                Player player = NetworkIdentity.spawned[playerId].gameObject.GetComponent<Player>();
                 player.CmdDealDamage(enemy.netId, damage);
             }
         NetworkServer.Destroy(gameObject);

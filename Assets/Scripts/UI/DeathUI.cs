@@ -19,14 +19,6 @@ public class DeathUI : NetworkBehaviour
         BackToMenu.onClick.AddListener(() => { player.DeathReturnToMenu(); });
     }
 
-    public IEnumerator FadeIn(uint netId)
-    {
-        Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
-        RpcFadeIn(player.connectionToClient);
-
-        yield return null;
-    }
-
     public void ReturnToMenu(uint netId)
     {
         if(isServer){
@@ -54,16 +46,4 @@ public class DeathUI : NetworkBehaviour
         Application.Quit();
     }
 
-    [TargetRpc]
-    public void RpcFadeIn(NetworkConnection conn)
-    {
-        Debug.Log("Fade in called");
-        targetAlpha = 1.0f;
-        deathUi.alpha = alpha;
-        while (Mathf.Abs(alpha - targetAlpha) > 0.0001f)
-        {
-            alpha = Mathf.Lerp(alpha, targetAlpha, FadeRate * Time.deltaTime);
-            deathUi.alpha = alpha;
-        }
-    }
 }

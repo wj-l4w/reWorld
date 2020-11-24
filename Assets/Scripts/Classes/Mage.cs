@@ -14,12 +14,14 @@ public class Mage : NetworkBehaviour
     [Header("Other Stuffs")]
     public LayerMask WhatIsEnemies;
     public Animator animator;
+    [SyncVar]
     public float offset;
     public GameObject weapon;
     public Fireball fireSpell;
     public Player player;
+    [SyncVar]
+    public float rotZ;
     private Quaternion rotation;
-    private uint fireballId;
 
     private void Start()
     {
@@ -30,7 +32,7 @@ public class Mage : NetworkBehaviour
     public void mageUpdate()
     {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         rotation = weapon.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
         if (rotZ > -90 && rotZ <= 90)
         {
@@ -50,10 +52,9 @@ public class Mage : NetworkBehaviour
                 animator.SetTrigger("mageIsAttacking");
                 
                 FindObjectOfType<AudioManager>().Play("Fireball");
-                Fireball fireball = Instantiate(fireSpell, atkPos.position, rotation);
-                NetworkServer.Spawn(fireball.gameObject, player.connectionToClient);
-                fireballId= fireball.netId;
-                CmdSetFireballStats(player.netId, fireballId);
+
+                CmdSpawnFireball(rotZ);
+
                 timeBtwAtk = startTimeBtwAtk;
             }
         }
@@ -65,10 +66,14 @@ public class Mage : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSetFireballStats(uint playerId, uint fireballId)
+    public void CmdSpawnFireball(float rot)
     {
-        NetworkManager3 nm3 = FindObjectOfType<NetworkManager3>();
-        nm3.SetFireballStats(playerId, fireballId);
-    }
+        Fireball fireball = Instantiate(fireSpell, atkPos.position, Quaternion.Euler(0f, 0f, rot + offset));
+        fireball.playerId = player.netId;
+        fireball.damage *= player.mageScript.fireballLevel;
+        fireball.speed = 8;
+        fireball.lifeTime = 1.5f;
+        NetworkServer.Spawn(fireball.gameObject);
+    } 
 
 }
