@@ -263,16 +263,8 @@ public class Player : NetworkBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 2)
         {
-            if (isServer)
-            {
-                currentHp -= dmg;
-                hud.SetHealth(currentHp, maxHp, netId);
-            }
-            else
-            {
-                CmdTakeDamage(dmg);
-            }
-
+            currentHp -= dmg;
+            hud.SetHealth(currentHp, maxHp, netId);
 
             if (currentHp <= 0)
             {
@@ -280,12 +272,6 @@ public class Player : NetworkBehaviour
             }
         }
 
-    }
-
-    [Command]
-    public void CmdTakeDamage(int dmg)
-    {
-        takeDamage(dmg);
     }
 
     [Command]
@@ -337,6 +323,7 @@ public class Player : NetworkBehaviour
         Debug.Log("Player " + netId + " has died");
         animator.SetTrigger("isDead");
         isDead = true;
+        Debug.Log("Win UI shown");
         deathScreen = FindObjectOfType<DeathUI>();
         deathScreen.GetComponent<Canvas>().enabled = true;
     }

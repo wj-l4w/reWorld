@@ -21,19 +21,13 @@ public class WinUI : NetworkBehaviour
 
     public void ReturnToMenu(uint netId)
     {
-        CmdReturnToMenu(netId);     
+        RpcBackToMenu(netId);     
     }
 
-    [Command]
-    public void CmdReturnToMenu(uint netId)
+    [ClientRpc]
+    public void RpcBackToMenu(uint netId)
     {
-        Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
-        RpcBackToMenu(player.connectionToClient , netId);
-    }
-
-    [TargetRpc]
-    public void RpcBackToMenu(NetworkConnection conn, uint netId)
-    {
+        Debug.Log("RpcBackToMenu Called");
         Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
         player.connectionToClient.Disconnect();
         Application.Quit();

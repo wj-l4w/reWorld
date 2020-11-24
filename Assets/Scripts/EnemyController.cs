@@ -31,6 +31,7 @@ public class EnemyController : NetworkBehaviour
     void Start()
     {
         myAnim = GetComponent<Animator>();
+        homePos = transform;
         currentHealth = maxHealth;
         //enemyAttack = GetComponent<EnemyAttack>();
     }
@@ -210,5 +211,6 @@ public class EnemyController : NetworkBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, expRange);
     }
+
 }
 
