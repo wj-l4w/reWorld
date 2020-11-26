@@ -371,7 +371,7 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdActivateMageScripts()
     {
-        RpcActivateWarriorScripts(netId);
+        RpcActivateMageScripts(netId);
     }
 
     [ClientRpc]
