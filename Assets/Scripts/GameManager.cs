@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
 
     void Start()
     {
-        FindPlayers();
+        Invoke(nameof(FindPlayers), 2);
     }
 
     void Update()
@@ -44,7 +44,17 @@ public class GameManager : NetworkBehaviour
     {
         if (alivePlayerArr.Count == 1)
         {
-            winUI.GetComponent<Canvas>().enabled = true;
+            Player winner = alivePlayerArr[0].GetComponent<Player>();
+            if (!winner.isDead)
+            {
+                RpcWinUI(winner.connectionToClient);
+            }
         }
+    }
+
+    [TargetRpc]
+    public void RpcWinUI(NetworkConnection conn)
+    {
+        winUI.GetComponent<Canvas>().enabled = true;
     }
 }

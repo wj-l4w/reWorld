@@ -24,14 +24,13 @@ public class TalentTree : NetworkBehaviour
         set
         {
             points = value;
-            UpdateTalentPointText();
+            Player player = NetworkIdentity.spawned[playerId].GetComponent<Player>();
+            CmdUpdateTalentPointText(player.netId);
         }
     }
 
     void Start()
     {
-        resetTalents();
-
         for(int i = 0; i < talents.Length; i++)
         {
             int x = i;
@@ -69,12 +68,15 @@ public class TalentTree : NetworkBehaviour
         }
     }
     
-    private void resetTalents()
+    [Command]
+    public void CmdUpdateTalentPointText(uint id)
     {
-        UpdateTalentPointText();
+        Player player = NetworkIdentity.spawned[id].gameObject.GetComponent<Player>();
+        RpcUpdateTalentPointText(player.connectionToClient);
     }
 
-    public void UpdateTalentPointText()
+    [TargetRpc]
+    public void RpcUpdateTalentPointText(NetworkConnection conn)
     {
         talentPointText.text = points.ToString();
     }
@@ -84,9 +86,10 @@ public class TalentTree : NetworkBehaviour
         gameObject.GetComponent<Canvas>().enabled = false;
     }
 
-    public void levelUp()
+    public void levelUp(uint playerId)
     {
         points++;
-        UpdateTalentPointText();
+        Player player =  NetworkIdentity.spawned[playerId].GetComponent<Player>();
+        CmdUpdateTalentPointText(player.netId);
     }
 }

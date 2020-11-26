@@ -35,6 +35,9 @@ public class Talent : NetworkBehaviour
         return false;
     }
 
+
+
+
     /* public void Lock()
     {
         sprite.color = Color.gray;

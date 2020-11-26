@@ -82,11 +82,11 @@ public class NetworkManager2 : NetworkManager
 
     public void SpawnMobs()
     {
-        es.initialSpawn(es.Enemies[0], 8);
-        es.initialSpawn(es.Enemies[1], 4);
-        es.initialSpawn(es.Enemies[2], 1);
-        es.initialSpawn(es.Enemies[3], 8);
-        es.initialSpawn(es.Enemies[4], 4);
+/*        es.RpcInitialSpawn(es.Enemies[0], 8);
+        es.RpcInitialSpawn(es.Enemies[1], 4);
+        es.RpcInitialSpawn(es.Enemies[2], 1);
+        es.RpcInitialSpawn(es.Enemies[3], 8);
+        es.RpcInitialSpawn(es.Enemies[4], 4);*/
     }
 
     public void checkPlayerClass(uint id)

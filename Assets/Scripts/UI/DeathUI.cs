@@ -21,26 +21,20 @@ public class DeathUI : NetworkBehaviour
 
     public void ReturnToMenu(uint netId)
     {
-        if(isServer){
-            Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
-            RpcBackToMenu(player.connectionToClient, netId);
-        }
-        else
-        {
-            CmdReturnToMenu(netId);
-        }
-        
+        CmdReturnToMenu(netId);
     }
 
     [Command]
     public void CmdReturnToMenu(uint netId)
     {
-        ReturnToMenu(netId);
+        Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
+        RpcBackToMenu(netId);
     }
 
-    [TargetRpc]
-    public void RpcBackToMenu(NetworkConnection conn, uint netId)
+    [ClientRpc]
+    public void RpcBackToMenu(uint netId)
     {
+        Debug.Log("RpcBackToMenu Called");
         Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
         player.connectionToClient.Disconnect();
         Application.Quit();

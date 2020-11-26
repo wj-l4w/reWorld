@@ -21,27 +21,13 @@ public class WinUI : NetworkBehaviour
 
     public void ReturnToMenu(uint netId)
     {
-        if(isServer){
-            Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
-            Debug.Log("The winner is player " + player.netId);
-            RpcBackToMenu(player.connectionToClient, netId);
-        }
-        else
-        {
-            CmdReturnToMenu(netId);
-        }
-        
+        RpcBackToMenu(netId);     
     }
 
-    [Command]
-    public void CmdReturnToMenu(uint netId)
+    [ClientRpc]
+    public void RpcBackToMenu(uint netId)
     {
-        ReturnToMenu(netId);
-    }
-
-    [TargetRpc]
-    public void RpcBackToMenu(NetworkConnection conn, uint netId)
-    {
+        Debug.Log("RpcBackToMenu Called");
         Player player = NetworkIdentity.spawned[netId].gameObject.GetComponent<Player>();
         player.connectionToClient.Disconnect();
         Application.Quit();
